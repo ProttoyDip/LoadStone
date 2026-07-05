@@ -1,0 +1,36 @@
+## .NET / Visual Studio
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+.vs/
+.vscode/
+
+## Build / publish output
+artifacts/
+publish/
+deployment/publish/*
+!deployment/publish/.gitkeep
+
+## ML artifacts (keep folders, ignore heavy binaries/data)
+src/Lodestone.ML/SavedModels/*
+!src/Lodestone.ML/SavedModels/.gitkeep
+src/Lodestone.ML/Data/*
+!src/Lodestone.ML/Data/.gitkeep
+src/Lodestone.ML/Reports/*
+!src/Lodestone.ML/Reports/.gitkeep
+
+## Database backups
+database/backup/*
+!database/backup/.gitkeep
+
+## Secrets
+appsettings.*.Local.json
+*.pfx
+keys/
+
+## OS
+.DS_Store
+Thumbs.db
