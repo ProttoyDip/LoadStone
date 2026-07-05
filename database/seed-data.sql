@@ -1,0 +1,2 @@
+-- Baseline reference data: roles, forum categories, crisis resources.
+-- Applied in code by DbInitializer / RoleSeeder; mirrored here for manual environments.

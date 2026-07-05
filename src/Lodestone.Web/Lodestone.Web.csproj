@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lodestone.Application\Lodestone.Application.csproj" />
+    <ProjectReference Include="..\Lodestone.Infrastructure\Lodestone.Infrastructure.csproj" />
+    <ProjectReference Include="..\Lodestone.ML\Lodestone.ML.csproj" />
+    <ProjectReference Include="..\Lodestone.Jobs\Lodestone.Jobs.csproj" />
+    <ProjectReference Include="..\Lodestone.Reporting\Lodestone.Reporting.csproj" />
+    <ProjectReference Include="..\Lodestone.Domain\Lodestone.Domain.csproj" />
+    <ProjectReference Include="..\Lodestone.Shared\Lodestone.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

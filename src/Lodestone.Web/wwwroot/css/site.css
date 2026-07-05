@@ -1,0 +1,4 @@
+/* Lodestone global styles */
+:root { --lodestone-primary: #2c3e73; --lodestone-accent: #4a90d9; }
+body { font-family: system-ui, sans-serif; margin: 0; }
+.navbar-brand { font-weight: 700; color: var(--lodestone-primary); }
