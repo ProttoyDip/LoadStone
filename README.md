@@ -527,7 +527,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 ## Academic Note
 
-Lodestone is designed for **educational / capstone (final-year project) use**. It is a demonstration
+Lodestone is designed for **educational / capstone  use**. It is a demonstration
 of behavioral learning analytics and supportive-technology design — **not** a substitute for
 professional mental health care. If you or someone you know is in crisis, please contact a qualified
 professional or local emergency services.
