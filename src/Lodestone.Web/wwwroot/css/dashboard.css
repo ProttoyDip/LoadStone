@@ -1,0 +1,4 @@
+/* Dashboard & analytics layout */
+.metric-card { border-radius: 8px; padding: 1rem; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+.risk-high { color: #c0392b; }
+.risk-critical { color: #7b241c; font-weight: 700; }
