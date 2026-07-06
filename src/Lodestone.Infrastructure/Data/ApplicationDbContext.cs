@@ -33,5 +33,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(builder);
         // Apply all IEntityTypeConfiguration<T> in this assembly.
         builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        // Default every relationship to NO ACTION on delete. The inferred
+        // conventions would otherwise emit multiple cascade paths to shared
+        // principals (e.g. CounselorBookings -> StudentProfiles + CounselorProfiles),
+        // which SQL Server rejects (error 1785). Individual configurations can
+        // still opt back into cascade explicitly where a true owning relationship exists.
+        foreach (var fk in builder.Model.GetEntityTypes()
+                     .SelectMany(e => e.GetForeignKeys())
+                     .Where(fk => fk.DeleteBehavior == DeleteBehavior.Cascade))
+        {
+            fk.DeleteBehavior = DeleteBehavior.Restrict;
+        }
     }
 }
