@@ -12,6 +12,8 @@ using Lodestone.Web;
 using Lodestone.Web.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
+var useHangfire = builder.Configuration.GetValue("Startup:UseHangfire", true);
+var initializeDatabase = builder.Configuration.GetValue("Startup:InitializeDatabase", true);
 
 // QuestPDF community licence (report generation lives in Lodestone.Reporting).
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
@@ -31,7 +33,10 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddMachineLearning(
     Path.Combine(builder.Environment.ContentRootPath, "..", "Lodestone.ML", "SavedModels", "risk-model.zip"));
-builder.Services.AddJobs(builder.Configuration);
+if (useHangfire)
+{
+    builder.Services.AddJobs(builder.Configuration);
+}
 builder.Services.AddReporting();
 
 var app = builder.Build();
@@ -57,20 +62,30 @@ app.MapControllerRoute(
 app.MapRazorPages();
 app.MapHub<CounselorQueueHub>(CounselorQueueHub.Route);
 app.MapHub<PeerChatHub>(PeerChatHub.Route);
-app.MapHangfireDashboard();
+if (useHangfire)
+{
+    app.MapHangfireDashboard();
+}
 
 // ---- Startup work: migrate DB, seed roles, schedule recurring jobs ----
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<ApplicationDbContext>();
-    await DbInitializer.InitializeAsync(context);
 
-    var roleManager = services.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Microsoft.AspNetCore.Identity.IdentityRole>>();
-    await RoleSeeder.SeedRolesAsync(roleManager);
+    if (initializeDatabase)
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        await DbInitializer.InitializeAsync(context);
 
-    var recurringJobs = services.GetRequiredService<IRecurringJobManager>();
-    RecurringJobScheduler.RegisterRecurringJobs(recurringJobs);
+        var roleManager = services.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Microsoft.AspNetCore.Identity.IdentityRole>>();
+        await RoleSeeder.SeedRolesAsync(roleManager);
+    }
+
+    if (useHangfire)
+    {
+        var recurringJobs = services.GetRequiredService<IRecurringJobManager>();
+        RecurringJobScheduler.RegisterRecurringJobs(recurringJobs);
+    }
 }
 
 app.Run();
