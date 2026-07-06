@@ -14,7 +14,6 @@
 
     var hasGsap = typeof window.gsap !== "undefined";
     var hasST = hasGsap && typeof window.ScrollTrigger !== "undefined";
-    var hasLenis = typeof window.Lenis !== "undefined";
 
     function showAll() { body.classList.add("no-motion"); }
 
@@ -22,12 +21,44 @@
     function initNavbar() {
         var nav = doc.getElementById("nav");
         if (!nav) return;
+        var toggleBtn = nav.querySelector(".nav__toggle");
+        var menu = toggleBtn ? doc.getElementById(toggleBtn.getAttribute("aria-controls")) : null;
+
+        function closeMenu() {
+            nav.classList.remove("is-open");
+            if (toggleBtn) {
+                toggleBtn.setAttribute("aria-expanded", "false");
+                toggleBtn.setAttribute("aria-label", "Open menu");
+            }
+        }
+
         var toggle = function () {
             var y = window.scrollY || window.pageYOffset || 0;
             nav.classList.toggle("is-scrolled", y > 24);
         };
         toggle();
         window.addEventListener("scroll", toggle, { passive: true });
+
+        if (toggleBtn && menu) {
+            toggleBtn.addEventListener("click", function () {
+                var open = !nav.classList.contains("is-open");
+                nav.classList.toggle("is-open", open);
+                toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+                toggleBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+            });
+
+            menu.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", closeMenu);
+            });
+
+            doc.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth >= 900) closeMenu();
+            }, { passive: true });
+        }
     }
 
     /* -------------------------------------------------------- Tab switching */
@@ -64,22 +95,30 @@
 
     /* -------------------------------------------------------- Lenis scroll */
     function initLenis() {
-        if (!hasLenis || prefersReduced) return null;
-        var lenis = new window.Lenis({
-            duration: 1.1,
-            easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-            smoothWheel: true
-        });
+        if (!window.Lenis || prefersReduced) return null;
+        try {
+            var lenis = new window.Lenis({
+                duration: 1.1,
+                easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+                smoothWheel: true
+            });
 
-        if (hasST) {
-            lenis.on("scroll", window.ScrollTrigger.update);
-            window.gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-            window.gsap.ticker.lagSmoothing(0);
-        } else {
-            var raf = function (time) { lenis.raf(time); requestAnimationFrame(raf); };
-            requestAnimationFrame(raf);
+            if (hasST) {
+                lenis.on("scroll", window.ScrollTrigger.update);
+                window.gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+                window.gsap.ticker.lagSmoothing(0);
+            } else {
+                var raf = function (time) { lenis.raf(time); requestAnimationFrame(raf); };
+                requestAnimationFrame(raf);
+            }
+            return lenis;
+        } catch (err) {
+            body.classList.add("no-lenis");
+            if (window.console && window.console.warn) {
+                window.console.warn("Lenis failed to initialize; using native scrolling.", err);
+            }
+            return null;
         }
-        return lenis;
     }
 
     /* Smooth-scroll for in-page anchors */
@@ -109,12 +148,21 @@
             gsap.set(heroLines, { yPercent: 115 });
             tl.to(heroLines, { yPercent: 0, duration: 0.9, stagger: 0.1 }, 0.1);
         }
-        tl.from(".hero__kicker", { y: 14, opacity: 0, duration: 0.6 }, 0.1)
-            .from(".hero__sub", { y: 18, opacity: 0, duration: 0.7 }, 0.5)
-            .from(".hero__cta", { y: 18, opacity: 0, duration: 0.7 }, 0.62)
-            .from(".hero__stat", { y: 14, opacity: 0, duration: 0.6, stagger: 0.09 }, 0.74)
-            .from(".hero__visual", { y: 34, opacity: 0, duration: 1 }, 0.4);
-        gsap.set(".hero .reveal", { clearProps: "opacity,transform" });
+        /* fromTo (not from): hero copy + visual carry the .reveal class, whose
+           CSS baseline is opacity:0. A plain .from() reads that 0 as the END
+           value and strands the element hidden — every tween here ends at
+           opacity:1 so content can never get stuck invisible. */
+        tl.fromTo(".hero__kicker", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.15)
+            .fromTo(".hero__sub", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, 0.5)
+            .fromTo(".hero__cta", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, 0.62)
+            .fromTo(".hero__stats", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.7)
+            .fromTo(".hero__stat", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, 0.72)
+            .fromTo(".hero__visual", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, 0.36)
+            .fromTo(".signal-card-main", { opacity: 0 }, { opacity: 1, duration: 0.65 }, 0.68)
+            .fromTo(".signal-card-checkin, .signal-card-queue, .privacy-chip, .support-pathway",
+                { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, stagger: 0.08 }, 0.82)
+            .fromTo(".signal-orbit .signal-node",
+                { opacity: 0, scale: 0.45 }, { opacity: 1, scale: 1, duration: 0.42, stagger: 0.07 }, 1.02);
 
         /* Gentle float on the hero figure */
         var fig = doc.getElementById("hero-figure");
@@ -212,10 +260,30 @@
         host.style.cssText = "position:absolute;inset:0;overflow:hidden;pointer-events:none;";
     }
 
+    /* Thin clay reading-progress bar pinned to the top of the viewport. */
+    function initScrollProgress() {
+        var bar = doc.createElement("div");
+        bar.setAttribute("aria-hidden", "true");
+        bar.style.cssText =
+            "position:fixed;top:0;left:0;height:2px;width:0;z-index:200;" +
+            "background:var(--clay);transform-origin:left center;pointer-events:none;";
+        body.appendChild(bar);
+        var update = function () {
+            var el = doc.documentElement;
+            var max = el.scrollHeight - el.clientHeight;
+            var y = window.scrollY || window.pageYOffset || 0;
+            bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+        };
+        update();
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update, { passive: true });
+    }
+
     /* ------------------------------------------------------------- Bootstrap */
     function start() {
         initNavbar();
         initTabs();
+        initScrollProgress();
 
         if (prefersReduced || !hasGsap || !hasST) {
             showAll();
