@@ -39,6 +39,16 @@ if (useHangfire)
 }
 builder.Services.AddReporting();
 
+// ---- Auth cookie routing (points Identity at the MVC AccountController) ----
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromDays(14);
+    options.SlidingExpiration = true;
+});
+
 var app = builder.Build();
 
 // ---- Middleware pipeline ----

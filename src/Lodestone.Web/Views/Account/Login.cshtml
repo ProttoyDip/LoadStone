@@ -1,0 +1,46 @@
+@model Lodestone.Web.ViewModels.Auth.LoginViewModel
+@{
+    ViewData["Title"] = "Sign in";
+    Layout = "_AuthLayout";
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<header class="auth__header">
+    <span class="auth__eyebrow">Welcome back</span>
+    <h1 class="auth__title">Sign in</h1>
+    <p class="auth__subtitle">Pick up where you left off with your check-ins and support.</p>
+</header>
+
+<form class="auth__form" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
+    <div asp-validation-summary="ModelOnly" class="auth__alert" role="alert"></div>
+
+    <div class="auth__field">
+        <label class="auth__label" asp-for="Email">Email</label>
+        <input class="auth__input" asp-for="Email" autocomplete="username" placeholder="you@university.edu" autofocus />
+        <span class="field-validation-error" asp-validation-for="Email"></span>
+    </div>
+
+    <div class="auth__field">
+        <div class="auth__label-row">
+            <label class="auth__label" asp-for="Password">Password</label>
+            <a class="auth__link" asp-action="ForgotPassword">Forgot password?</a>
+        </div>
+        <input class="auth__input" asp-for="Password" autocomplete="current-password" placeholder="••••••••" />
+        <span class="field-validation-error" asp-validation-for="Password"></span>
+    </div>
+
+    <label class="auth__check">
+        <input asp-for="RememberMe" />
+        <span>Keep me signed in on this device</span>
+    </label>
+
+    <button class="auth__btn" type="submit">Sign in</button>
+</form>
+
+<p class="auth__foot">
+    New to Lodestone? <a class="auth__link" asp-action="Register" asp-route-returnUrl="@returnUrl">Create an account</a>
+</p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -11,6 +11,19 @@
     <header>
         <nav class="navbar">
             <a class="navbar-brand" href="/">Lodestone</a>
+            <div class="navbar-actions">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <span class="navbar-user" title="Signed in">@User.Identity!.Name</span>
+                    <form class="navbar-logout" asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="btn-logout">Sign out</button>
+                    </form>
+                }
+                else
+                {
+                    <a class="navbar-signin" asp-controller="Account" asp-action="Login">Sign in</a>
+                }
+            </div>
         </nav>
     </header>
     <main role="main" class="container">

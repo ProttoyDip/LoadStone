@@ -1,0 +1,56 @@
+@model Lodestone.Web.ViewModels.Auth.RegisterViewModel
+@{
+    ViewData["Title"] = "Create account";
+    Layout = "_AuthLayout";
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<header class="auth__header">
+    <span class="auth__eyebrow">Get started</span>
+    <h1 class="auth__title">Create your account</h1>
+    <p class="auth__subtitle">Join Lodestone as a student — it takes less than a minute.</p>
+</header>
+
+<form class="auth__form" asp-action="Register" asp-route-returnUrl="@returnUrl" method="post">
+    <div asp-validation-summary="ModelOnly" class="auth__alert" role="alert"></div>
+
+    <div class="auth__field">
+        <label class="auth__label" asp-for="FullName"></label>
+        <input class="auth__input" asp-for="FullName" autocomplete="name" placeholder="Alex Rahman" autofocus />
+        <span class="field-validation-error" asp-validation-for="FullName"></span>
+    </div>
+
+    <div class="auth__field">
+        <label class="auth__label" asp-for="Email">Email</label>
+        <input class="auth__input" asp-for="Email" autocomplete="email" placeholder="you@university.edu" />
+        <span class="field-validation-error" asp-validation-for="Email"></span>
+    </div>
+
+    <div class="auth__field">
+        <label class="auth__label" asp-for="Password">Password</label>
+        <input class="auth__input" asp-for="Password" autocomplete="new-password" placeholder="At least 8 characters" />
+        <span class="field-validation-error" asp-validation-for="Password"></span>
+    </div>
+
+    <div class="auth__field">
+        <label class="auth__label" asp-for="ConfirmPassword"></label>
+        <input class="auth__input" asp-for="ConfirmPassword" autocomplete="new-password" placeholder="Re-enter your password" />
+        <span class="field-validation-error" asp-validation-for="ConfirmPassword"></span>
+    </div>
+
+    <label class="auth__check">
+        <input asp-for="AcceptPrivacy" />
+        <span>I understand Lodestone reads learning signals to offer gentle support, and I agree to the <a class="auth__link" href="/Home/Privacy" target="_blank">privacy commitment</a>.</span>
+    </label>
+    <span class="field-validation-error" asp-validation-for="AcceptPrivacy"></span>
+
+    <button class="auth__btn" type="submit">Create account</button>
+</form>
+
+<p class="auth__foot">
+    Already have an account? <a class="auth__link" asp-action="Login" asp-route-returnUrl="@returnUrl">Sign in</a>
+</p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
