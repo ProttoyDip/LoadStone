@@ -10,18 +10,25 @@
             Lodestone<span class="brand__dot" aria-hidden="true"></span>
         </a>
 
-        <nav aria-label="Primary">
+        <nav class="nav__menu" id="primary-nav" aria-label="Primary">
             <ul class="nav__links">
                 <li><a href="#how-it-works">How it works</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#privacy">Privacy</a></li>
                 <li><a href="#technology">Technology</a></li>
             </ul>
+            <a class="nav__menu-signin" href="/Identity/Account/Login">Sign in</a>
+            <a class="btn btn--clay btn--sm nav__menu-cta" href="#contact">Request demo</a>
         </nav>
 
         <div class="nav__actions">
             <a class="nav__signin" href="/Identity/Account/Login">Sign in</a>
             <a class="btn btn--clay btn--sm" href="#contact">Request demo</a>
+            <button class="nav__toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
         </div>
     </div>
 </header>
@@ -63,57 +70,39 @@
                 </div>
             </div>
 
-            @* ---- Hero signal animation ---- *@
-            <div class="hero__visual reveal">
-                <div class="signal-constellation" aria-label="Animated engagement signals moving into a gentle support pathway">
-                    <div class="constellation__header">
-                        <span class="mono-label">Live support map</span>
-                        <span class="constellation__status"><i aria-hidden="true"></i> Calm monitoring</span>
+            @* ---- Signal Orbit: product flow visual ---- *@
+            <div class="hero__visual hero-visual reveal" aria-hidden="true">
+                <div class="signal-orbit">
+                    <div class="orbit-ring orbit-ring-one"></div>
+                    <div class="orbit-ring orbit-ring-two"></div>
+
+                    <div class="signal-card signal-card-main">
+                        <span class="signal-label">Weekly rhythm</span>
+                        <div class="mini-chart">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <p>Engagement change detected</p>
                     </div>
 
-                    <div class="constellation__stage" aria-hidden="true">
-                        <svg class="constellation__lines" viewBox="0 0 560 420" preserveAspectRatio="none">
-                            <path class="route route--one" d="M72 96 C166 58 226 116 298 98 S440 74 494 128" />
-                            <path class="route route--two" d="M92 310 C172 210 250 272 310 206 S424 146 490 218" />
-                            <path class="route route--three" d="M126 184 C216 150 260 196 330 168 S430 170 468 286" />
-                        </svg>
-
-                        <span class="signal-node signal-node--login">
-                            <b>Login rhythm</b>
-                            <small>steady</small>
-                        </span>
-                        <span class="signal-node signal-node--activity">
-                            <b>Activity span</b>
-                            <small>soft dip</small>
-                        </span>
-                        <span class="signal-node signal-node--forum">
-                            <b>Forum signal</b>
-                            <small>quiet</small>
-                        </span>
-                        <span class="signal-node signal-node--nudge">
-                            <b>Check-in</b>
-                            <small>suggested</small>
-                        </span>
-
-                        <span class="moving-signal moving-signal--one"></span>
-                        <span class="moving-signal moving-signal--two"></span>
-                        <span class="moving-signal moving-signal--three"></span>
-
-                        <article class="support-card support-card--student">
-                            <span>Student view</span>
-                            <strong>Gentle prompt ready</strong>
-                        </article>
-                        <article class="support-card support-card--counselor">
-                            <span>Counselor queue</span>
-                            <strong>Human review next</strong>
-                        </article>
+                    <div class="signal-card signal-card-checkin">
+                        <span class="status-dot"></span>
+                        <strong>Check-in suggested</strong>
+                        <small>Low-pressure support nudge</small>
                     </div>
 
-                    <div class="constellation__footer">
-                        <span>5 signals</span>
-                        <span>Weekly ML.NET pass</span>
-                        <span>No diagnosis</span>
+                    <div class="signal-card signal-card-queue">
+                        <span class="signal-label">Counselor queue</span>
+                        <strong>Follow-up suggested</strong>
+                        <small>Privacy-respecting view</small>
                     </div>
+
+                    <div class="privacy-chip">Privacy-first</div>
+                    <div class="support-pathway">Support pathway opened</div>
+
+                    <span class="signal-node node-one"></span>
+                    <span class="signal-node node-two"></span>
+                    <span class="signal-node node-three"></span>
+                    <span class="signal-node node-four"></span>
                 </div>
             </div>
         </div>
