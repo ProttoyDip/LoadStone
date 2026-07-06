@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lodestone — behavioral early-warning and peer support for student wellbeing." />
+    <meta name="theme-color" content="#F4EEE3" />
+    <title>@ViewData["Title"] - Lodestone</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+</head>
+<body class="auth">
+    <div class="auth__grid">
+
+        @* ---- Editorial brand panel (hidden on small screens) ---- *@
+        <aside class="auth__aside" aria-hidden="true">
+            <div class="auth__aside-inner">
+                <a class="auth__brand" href="/">Lodestone<span class="auth__brand-dot"></span></a>
+
+                <p class="auth__mono">Behavioral early-warning &middot; Peer &amp; counselor support</p>
+
+                <blockquote class="auth__quote">
+                    Support that notices <em>before</em> silence becomes crisis.
+                </blockquote>
+
+                <ul class="auth__notes">
+                    <li><span class="auth__tick"></span> Gentle check-ins, not surveillance</li>
+                    <li><span class="auth__tick"></span> Peer support &amp; counselor care</li>
+                    <li><span class="auth__tick"></span> Your data stays private</li>
+                </ul>
+
+                <p class="auth__aside-foot">© @DateTime.UtcNow.Year Lodestone</p>
+            </div>
+        </aside>
+
+        @* ---- Form panel ---- *@
+        <main class="auth__main" role="main">
+            <div class="auth__card">
+                <a class="auth__brand auth__brand--mobile" href="/">Lodestone<span class="auth__brand-dot"></span></a>
+                @RenderBody()
+            </div>
+        </main>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Lodestone — Authentication pages
+   Split editorial layout. Reuses design tokens from landing.css (paper, ink,
+   clay, forest; Calistoga / Inter / JetBrains Mono).
+   ========================================================================== */
+
+body.auth {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image: radial-gradient(rgba(32, 28, 23, 0.035) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.auth__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+}
+
+/* ---- Brand aside --------------------------------------------------------- */
+.auth__aside { display: none; }
+
+@media (min-width: 900px) {
+    .auth__grid { grid-template-columns: 1.05fr 1fr; }
+    .auth__aside {
+        display: block;
+        position: relative;
+        background: var(--espresso);
+        color: var(--paper-on-dark);
+        border-right: 1px solid var(--line-on-dark);
+        overflow: hidden;
+    }
+    .auth__aside::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(244, 238, 227, 0.05) 1px, transparent 1px);
+        background-size: 22px 22px;
+        pointer-events: none;
+    }
+}
+
+.auth__aside-inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.75rem;
+    padding: clamp(2.5rem, 5vw, 5rem);
+    max-width: 34rem;
+}
+
+.auth__brand {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+}
+.auth__brand-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--clay);
+    display: inline-block;
+}
+
+.auth__mono {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-on-dark);
+}
+
+.auth__quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.2vw, 2.6rem);
+    line-height: 1.12;
+    margin: 0;
+}
+.auth__quote em { color: var(--clay); font-style: italic; }
+
+.auth__notes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--muted-on-dark);
+}
+.auth__notes li { display: flex; align-items: center; gap: 0.6rem; }
+.auth__tick {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--forest);
+    flex: none;
+}
+
+.auth__aside-foot {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted-on-dark);
+    margin-top: auto;
+}
+
+/* ---- Form panel ---------------------------------------------------------- */
+.auth__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.auth__card {
+    width: 100%;
+    max-width: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.auth__brand--mobile {
+    color: var(--ink);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+@media (min-width: 900px) {
+    .auth__brand--mobile { display: none; }
+}
+
+.auth__header { display: grid; gap: 0.4rem; }
+.auth__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.auth__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 4vw, 2.15rem);
+    color: var(--ink);
+}
+.auth__subtitle {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+}
+
+/* ---- Form ---------------------------------------------------------------- */
+.auth__form { display: grid; gap: 1.1rem; }
+
+.auth__field { display: grid; gap: 0.4rem; }
+.auth__label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+}
+
+.auth__input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    padding: 0.7rem 0.85rem;
+    transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.auth__input::placeholder { color: var(--muted); }
+.auth__input:focus {
+    outline: none;
+    border-color: var(--clay);
+    box-shadow: 0 0 0 3px rgba(188, 81, 56, 0.15);
+}
+.auth__input.input-validation-error {
+    border-color: var(--clay-deep);
+    background: var(--clay-wash);
+}
+
+.auth__label-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+/* Checkbox rows (remember me / privacy) */
+.auth__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+}
+.auth__check input[type="checkbox"] {
+    margin-top: 0.15rem;
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--clay);
+    flex: none;
+}
+
+/* Links */
+.auth__link {
+    color: var(--clay-deep);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s var(--ease);
+}
+.auth__link:hover { border-bottom-color: var(--clay-deep); }
+
+/* ---- Button (mirrors landing .btn--clay) --------------------------------- */
+.auth__btn {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--paper);
+    background: var(--clay);
+    border: 1px solid var(--clay-deep);
+    border-radius: var(--r-sm);
+    padding: 0.78rem 1rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-print);
+    transition: transform 0.12s var(--ease), background 0.15s var(--ease);
+}
+.auth__btn:hover { background: var(--clay-deep); transform: translateY(-1px); }
+.auth__btn:active { transform: translateY(0); box-shadow: none; }
+
+/* ---- Divider / footer ---------------------------------------------------- */
+.auth__foot {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    text-align: center;
+}
+.auth__foot .auth__link { font-size: 0.9rem; }
+
+.auth__divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.auth__divider::before,
+.auth__divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+/* ---- Validation & alerts ------------------------------------------------- */
+.auth__alert {
+    border: 1px solid var(--clay-deep);
+    background: var(--clay-wash);
+    color: var(--clay-deep);
+    border-radius: var(--r-sm);
+    padding: 0.7rem 0.85rem;
+    font-size: 0.88rem;
+}
+.auth__alert ul { margin: 0; padding-left: 1.1rem; }
+.auth__alert--ok {
+    border-color: var(--forest);
+    background: var(--forest-wash);
+    color: var(--forest);
+}
+
+.field-validation-error {
+    color: var(--clay-deep);
+    font-size: 0.8rem;
+}
+.validation-summary-errors { font-size: 0.85rem; }
+
+/* ---- Confirmation (centered message) pages ------------------------------- */
+.auth__confirm { display: grid; gap: 1rem; text-align: left; }
+.auth__confirm-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--forest-wash);
+    color: var(--forest);
+    font-size: 1.4rem;
+    border: 1px solid var(--forest);
+}
