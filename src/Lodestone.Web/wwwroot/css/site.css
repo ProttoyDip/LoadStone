@@ -1,4 +1,33 @@
 /* Lodestone global styles */
 :root { --lodestone-primary: #2c3e73; --lodestone-accent: #4a90d9; }
 body { font-family: system-ui, sans-serif; margin: 0; }
-.navbar-brand { font-weight: 700; color: var(--lodestone-primary); }
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid #e2e2e2;
+}
+.navbar-brand { font-weight: 700; color: var(--lodestone-primary); text-decoration: none; font-size: 1.15rem; }
+
+.navbar-actions { display: flex; align-items: center; gap: 0.85rem; }
+.navbar-user { color: #555; font-size: 0.9rem; }
+.navbar-signin { color: var(--lodestone-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+.navbar-signin:hover { text-decoration: underline; }
+.navbar-logout { margin: 0; }
+
+.btn-logout {
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lodestone-primary);
+    background: transparent;
+    border: 1px solid var(--lodestone-primary);
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-logout:hover { background: var(--lodestone-primary); color: #fff; }
