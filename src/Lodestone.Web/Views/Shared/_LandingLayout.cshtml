@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lodestone — a behavioral early-warning and peer support platform that detects early student disengagement and connects students with gentle check-ins, peer support and counselor care." />
+    <meta name="theme-color" content="#F4EEE3" />
+    <title>@ViewData["Title"] - Lodestone</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+    <noscript>
+        <style>.reveal { opacity: 1 !important; transform: none !important; } .signal-dot { display: none; }</style>
+    </noscript>
+</head>
+<body class="landing" data-lenis-prevent-fallback>
+    @RenderBody()
+
+    <!-- Motion libraries (pinned CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+    <script src="~/js/landing.js" asp-append-version="true" defer></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

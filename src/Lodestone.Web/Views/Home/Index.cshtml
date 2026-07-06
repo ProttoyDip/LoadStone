@@ -1,5 +1,462 @@
 @{
-    ViewData["Title"] = "Welcome to Lodestone";
+    ViewData["Title"] = "Lodestone — Student Wellbeing, Before Silence Becomes Crisis";
+    Layout = "_LandingLayout";
 }
-<h1>Welcome to Lodestone</h1>
-<p>Lodestone — placeholder view. Wire up the view model in the corresponding controller action.</p>
+
+@* ============================================================= Navbar ==== *@
+<header class="nav" id="nav">
+    <div class="shell nav__inner">
+        <a class="brand" href="#top" aria-label="Lodestone home">
+            Lodestone<span class="brand__dot" aria-hidden="true"></span>
+        </a>
+
+        <nav aria-label="Primary">
+            <ul class="nav__links">
+                <li><a href="#how-it-works">How it works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#technology">Technology</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav__actions">
+            <a class="nav__signin" href="/Identity/Account/Login">Sign in</a>
+            <a class="btn btn--clay btn--sm" href="#contact">Request demo</a>
+        </div>
+    </div>
+</header>
+
+<main id="top">
+
+    @* ========================================================== Hero ==== *@
+    <section class="hero">
+        <div class="shell hero__grid">
+            <div class="hero__copy">
+                <div class="hero__kicker reveal">
+                    <span class="tick" aria-hidden="true"></span>
+                    <span class="mono-label">Behavioral early-warning &middot; Peer &amp; counselor support</span>
+                </div>
+
+                <h1 aria-label="Support that notices before silence becomes crisis.">
+                    <span class="line"><span>Support that</span></span>
+                    <span class="line"><span>notices <em>before</em></span></span>
+                    <span class="line"><span><span class="u">silence</span> becomes</span></span>
+                    <span class="line"><span>crisis.</span></span>
+                </h1>
+
+                <p class="hero__sub reveal">
+                    Lodestone reads everyday learning signals — login rhythm, activity span, participation —
+                    to spot early disengagement, then opens a gentle path to check-ins, peers, and counselor care.
+                </p>
+
+                <div class="hero__cta reveal">
+                    <a class="btn btn--clay" href="#features">Explore the platform</a>
+                    <a class="link-underline" href="#how-it-works">
+                        How it works <span class="arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+
+                <div class="hero__stats reveal">
+                    <div class="hero__stat"><strong>5+</strong><span>Behavioral signals</span></div>
+                    <div class="hero__stat"><strong>Weekly</strong><span>Risk engine cadence</span></div>
+                    <div class="hero__stat"><strong>Opt-in</strong><span>Privacy by default</span></div>
+                </div>
+            </div>
+
+            @* ---- Hero signal animation ---- *@
+            <div class="hero__visual reveal">
+                <div class="signal-constellation" aria-label="Animated engagement signals moving into a gentle support pathway">
+                    <div class="constellation__header">
+                        <span class="mono-label">Live support map</span>
+                        <span class="constellation__status"><i aria-hidden="true"></i> Calm monitoring</span>
+                    </div>
+
+                    <div class="constellation__stage" aria-hidden="true">
+                        <svg class="constellation__lines" viewBox="0 0 560 420" preserveAspectRatio="none">
+                            <path class="route route--one" d="M72 96 C166 58 226 116 298 98 S440 74 494 128" />
+                            <path class="route route--two" d="M92 310 C172 210 250 272 310 206 S424 146 490 218" />
+                            <path class="route route--three" d="M126 184 C216 150 260 196 330 168 S430 170 468 286" />
+                        </svg>
+
+                        <span class="signal-node signal-node--login">
+                            <b>Login rhythm</b>
+                            <small>steady</small>
+                        </span>
+                        <span class="signal-node signal-node--activity">
+                            <b>Activity span</b>
+                            <small>soft dip</small>
+                        </span>
+                        <span class="signal-node signal-node--forum">
+                            <b>Forum signal</b>
+                            <small>quiet</small>
+                        </span>
+                        <span class="signal-node signal-node--nudge">
+                            <b>Check-in</b>
+                            <small>suggested</small>
+                        </span>
+
+                        <span class="moving-signal moving-signal--one"></span>
+                        <span class="moving-signal moving-signal--two"></span>
+                        <span class="moving-signal moving-signal--three"></span>
+
+                        <article class="support-card support-card--student">
+                            <span>Student view</span>
+                            <strong>Gentle prompt ready</strong>
+                        </article>
+                        <article class="support-card support-card--counselor">
+                            <span>Counselor queue</span>
+                            <strong>Human review next</strong>
+                        </article>
+                    </div>
+
+                    <div class="constellation__footer">
+                        <span>5 signals</span>
+                        <span>Weekly ML.NET pass</span>
+                        <span>No diagnosis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @* ======================================================= Problem ==== *@
+    <section class="section" aria-labelledby="problem-title">
+        <div class="shell">
+            <div class="sec-head reveal">
+                <span class="sec-head__index">01 &middot; The quiet gap</span>
+                <h2 id="problem-title">Most students don&rsquo;t ask for help until it&rsquo;s already serious.</h2>
+                <p>Systems that wait for a raised hand miss the students who go quiet. Behavior often shifts
+                   long before anyone speaks up.</p>
+            </div>
+
+            <div class="problem-list">
+                <article class="problem-item reveal">
+                    <span class="problem-item__no">01</span>
+                    <h3>Students under-report distress</h3>
+                    <p>Stigma and fear of judgement keep many from speaking up, even when they&rsquo;re struggling.</p>
+                </article>
+                <article class="problem-item reveal">
+                    <span class="problem-item__no">02</span>
+                    <h3>Self-report misses the silent</h3>
+                    <p>Surveys only capture those who choose to answer — the quietest students rarely do.</p>
+                </article>
+                <article class="problem-item reveal">
+                    <span class="problem-item__no">03</span>
+                    <h3>Behavior changes appear earlier</h3>
+                    <p>Login rhythm, activity span and participation can surface a need for support sooner.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    @* ================================================= How it works ==== *@
+    <section class="section" id="how-it-works" aria-labelledby="how-title">
+        <div class="shell">
+            <div class="sec-head reveal">
+                <span class="sec-head__index">02 &middot; How it works</span>
+                <h2 id="how-title">From routine signals to a caring, human pathway.</h2>
+                <p>Four calm steps carry a student from everyday data toward the right kind of support —
+                   never a verdict, always an invitation.</p>
+            </div>
+
+            <div class="steps">
+                <span class="steps__rail" aria-hidden="true"></span>
+                <article class="step reveal">
+                    <span class="step__marker" aria-hidden="true"></span>
+                    <span class="mono-label step__label">Step 01</span>
+                    <h3>Routine activity signals</h3>
+                    <p>Login frequency, activity span, days since last access, submission timing, participation.</p>
+                </article>
+                <article class="step reveal">
+                    <span class="step__marker" aria-hidden="true"></span>
+                    <span class="mono-label step__label">Step 02</span>
+                    <h3>Weekly risk engine</h3>
+                    <p>An ML.NET model reviews patterns each week to notice early, gentle changes in engagement.</p>
+                </article>
+                <article class="step reveal">
+                    <span class="step__marker" aria-hidden="true"></span>
+                    <span class="mono-label step__label">Step 03</span>
+                    <h3>Gentle check-in nudge</h3>
+                    <p>Students see &ldquo;Check-in suggested&rdquo; — a warm, optional prompt, never a clinical flag.</p>
+                </article>
+                <article class="step reveal">
+                    <span class="step__marker" aria-hidden="true"></span>
+                    <span class="mono-label step__label">Step 04</span>
+                    <h3>Peer or counselor care</h3>
+                    <p>From there: peer support, a counselor booking, or immediate crisis resources.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    @* ============================================ Dashboard preview ==== *@
+    <section class="section preview" aria-labelledby="preview-title">
+        <div class="shell">
+            <div class="sec-head reveal">
+                <span class="sec-head__index">03 &middot; Inside the platform</span>
+                <h2 id="preview-title">One platform, calmly tuned to each role.</h2>
+                <p>Students, counselors and administrators each see exactly what they need — and nothing they shouldn&rsquo;t.</p>
+            </div>
+
+            <div class="tabs reveal" role="tablist" aria-label="Dashboard views">
+                <button class="tab" id="tab-student" role="tab" aria-selected="true" aria-controls="panel-student">Student</button>
+                <button class="tab" id="tab-counselor" role="tab" aria-selected="false" aria-controls="panel-counselor" tabindex="-1">Counselor</button>
+                <button class="tab" id="tab-admin" role="tab" aria-selected="false" aria-controls="panel-admin" tabindex="-1">Admin</button>
+            </div>
+
+            @* ---- Student ---- *@
+            <div class="tabpanel is-active" id="panel-student" role="tabpanel" aria-labelledby="tab-student">
+                <div class="dash">
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>Check-in suggested</h4><span class="pill pill--clay">Optional</span></div>
+                        <p>&ldquo;How has this week felt for you?&rdquo; Answer whenever you&rsquo;re ready.</p>
+                        <div class="alert">
+                            <span class="alert__ring" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 8v4l3 2" /><circle cx="12" cy="12" r="9" /></svg>
+                            </span>
+                            <div><h5>A gentle nudge arrived</h5><p>Respond, snooze, or opt out anytime.</p></div>
+                        </div>
+                    </article>
+
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>Mood journal</h4><span class="dcard__fig">Fig. 3a &middot; Private</span></div>
+                        <ul class="rows">
+                            <li><span class="k">MON</span> On top of the readings <span class="spacer pill pill--forest">Good</span></li>
+                            <li><span class="k">WED</span> A bit stretched this week <span class="spacer pill">Okay</span></li>
+                            <li><span class="k">FRI</span> Behind on the group project <span class="spacer pill pill--clay">Low</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>Peer support</h4><span class="pill">Moderated</span></div>
+                        <p>Connect with trained peer supporters in a safe, moderated space.</p>
+                        <div class="meter"><span style="width:72%"></span></div>
+                        <a class="link-underline btn--sm" href="#contact" style="margin-top:1.1rem;">Book a counselor <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                    </article>
+                </div>
+            </div>
+
+            @* ---- Counselor ---- *@
+            <div class="tabpanel" id="panel-counselor" role="tabpanel" aria-labelledby="tab-counselor" hidden>
+                <div class="dash">
+                    <article class="dcard dash__wide reveal">
+                        <div class="dcard__head"><h4>Support queue</h4><span class="pill">Privacy-respecting</span></div>
+                        <ul class="rows">
+                            <li><span class="k">A</span> Check-in suggested <span class="spacer pill">Follow-up</span></li>
+                            <li><span class="k">B</span> Booking request <span class="spacer pill pill--clay">New</span></li>
+                            <li><span class="k">C</span> Peer match made <span class="spacer pill pill--forest">Active</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>Live alert</h4><span class="dcard__fig">SignalR</span></div>
+                        <div class="alert">
+                            <span class="alert__ring" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" /></svg>
+                            </span>
+                            <div><h5>New booking request</h5><p>Routed to you for a follow-up.</p></div>
+                        </div>
+                    </article>
+
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>Booking request</h4><span class="pill">Pending</span></div>
+                        <p>Thursday &middot; 2:00 PM &middot; 30 min &middot; Wellbeing check-in.</p>
+                        <a class="link-underline btn--sm" href="#contact" style="margin-top:1.1rem;">Accept &amp; schedule <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                    </article>
+                </div>
+            </div>
+
+            @* ---- Admin ---- *@
+            <div class="tabpanel" id="panel-admin" role="tabpanel" aria-labelledby="tab-admin" hidden>
+                <div class="dash">
+                    <article class="dcard dash__wide reveal">
+                        <div class="dcard__head"><h4>Aggregate flagged trend</h4><span class="dcard__fig">Fig. 3b &middot; Anonymised</span></div>
+                        <svg class="dplot" viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true">
+                            <g class="dplot__grid">
+                                <line x1="0" y1="30" x2="520" y2="30" />
+                                <line x1="0" y1="60" x2="520" y2="60" />
+                                <line x1="0" y1="90" x2="520" y2="90" />
+                            </g>
+                            <path class="dplot__line" d="M8,90 C70,70 110,96 160,72 C210,48 250,84 300,60 C350,38 400,66 450,44 C480,32 500,40 512,36" />
+                        </svg>
+                    </article>
+
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>Forum moderation</h4><span class="pill pill--forest">Queue</span></div>
+                        <ul class="rows">
+                            <li><span class="k">OK</span> 3 posts approved</li>
+                            <li><span class="k">!</span> 1 flagged for review</li>
+                        </ul>
+                    </article>
+
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>ML model performance</h4><span class="dcard__fig">Weekly run</span></div>
+                        <p>Precision holding steady across the last four training runs.</p>
+                        <div class="meter"><span style="width:86%"></span></div>
+                    </article>
+
+                    <article class="dcard reveal">
+                        <div class="dcard__head"><h4>Hangfire jobs</h4><span class="pill pill--forest">Healthy</span></div>
+                        <ul class="rows">
+                            <li><span class="k">RUN</span> Weekly risk engine <span class="spacer pill">Succeeded</span></li>
+                            <li><span class="k">SCH</span> Nudge dispatch <span class="spacer pill">Scheduled</span></li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @* ==================================================== Features ==== *@
+    <section class="section" id="features" aria-labelledby="features-title">
+        <div class="shell">
+            <div class="sec-head reveal">
+                <span class="sec-head__index">04 &middot; Capabilities</span>
+                <h2 id="features-title">A complete, privacy-conscious support toolkit.</h2>
+                <p>From the behavioral engine to background jobs and reporting — calm, human, dependable.</p>
+            </div>
+
+            <div class="features">
+                @{
+                    var features = new (string Icon, string No, string Title, string Desc)[]
+                    {
+                        ("engine", "01", "Behavioral Risk Engine", "Weekly signals become a gentle, private support indicator."),
+                        ("nudge", "02", "Gentle Nudge Flow", "Warm, optional check-ins — never alarming, always human."),
+                        ("peers", "03", "Peer Support Forum", "Moderated spaces where students help students, safely."),
+                        ("queue", "04", "Counselor Queue", "A privacy-respecting queue that routes care to the right person."),
+                        ("journal", "05", "Mood Journal", "A private reflection space students fully control."),
+                        ("crisis", "06", "Crisis Resources", "Immediate, human pathways when they matter most."),
+                        ("bell", "07", "SignalR Live Alerts", "Real-time notifications for counselors, delivered softly."),
+                        ("jobs", "08", "Hangfire Background Jobs", "Reliable scheduling for the weekly engine and nudges."),
+                        ("pdf", "09", "QuestPDF Reports", "Clean, shareable summaries for institutional review."),
+                        ("chart", "10", "Chart.js Analytics", "Readable trends that respect student anonymity."),
+                        ("ml", "11", "ML.NET Prediction", "On-platform models — no data leaves your institution."),
+                        ("lock", "12", "Privacy Controls", "Opt-out, consent and support-only visibility, by default."),
+                    };
+                }
+                @foreach (var f in features)
+                {
+                    <article class="feature reveal">
+                        <div class="feature__top">
+                            <span class="icon" aria-hidden="true">
+                                @switch (f.Icon)
+                                {
+                                    case "engine":
+                                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" /></svg>
+                                        break;
+                                    case "nudge":
+                                        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.9A8.5 8.5 0 1 1 21 11.5z" /></svg>
+                                        break;
+                                    case "peers":
+                                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8" /></svg>
+                                        break;
+                                    case "queue":
+                                        <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13" /><circle cx="3.5" cy="6" r="1.2" /><circle cx="3.5" cy="12" r="1.2" /><circle cx="3.5" cy="18" r="1.2" /></svg>
+                                        break;
+                                    case "journal":
+                                        <svg viewBox="0 0 24 24"><path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 0-3 3z" /><path d="M9 8h6M9 12h6" /></svg>
+                                        break;
+                                    case "crisis":
+                                        <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" /></svg>
+                                        break;
+                                    case "bell":
+                                        <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.7 21a2 2 0 0 1-3.4 0" /></svg>
+                                        break;
+                                    case "jobs":
+                                        <svg viewBox="0 0 24 24"><path d="M12 6v6l4 2" /><path d="M21 12a9 9 0 1 1-3-6.7" /><path d="M21 4v4h-4" /></svg>
+                                        break;
+                                    case "pdf":
+                                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15h6M9 18h4" /></svg>
+                                        break;
+                                    case "chart":
+                                        <svg viewBox="0 0 24 24"><path d="M3 3v18h18" /><path d="M7 15l4-5 3 3 4-6" /></svg>
+                                        break;
+                                    case "ml":
+                                        <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2" /><circle cx="18" cy="6" r="2" /><circle cx="12" cy="18" r="2" /><path d="M8 6h8M7 8l4 8M17 8l-4 8" /></svg>
+                                        break;
+                                    default:
+                                        <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+                                        break;
+                                }
+                            </span>
+                            <span class="feature__no">@f.No</span>
+                        </div>
+                        <h3>@f.Title</h3>
+                        <p>@f.Desc</p>
+                    </article>
+                }
+            </div>
+        </div>
+    </section>
+
+    @* ===================================================== Privacy ==== *@
+    <section class="section privacy" id="privacy" aria-labelledby="privacy-title">
+        <div class="shell">
+            <div class="sec-head reveal">
+                <span class="sec-head__index">05 &middot; Ethics &amp; privacy</span>
+                <h2 id="privacy-title">Support routing, not surveillance.</h2>
+            </div>
+
+            <div class="privacy__grid">
+                <p class="privacy__statement reveal">
+                    A risk signal is only ever an <em>invitation to care</em> — handled by people, held to consent.
+                </p>
+
+                <ul class="principles">
+                    <li class="reveal"><span class="no">P1</span><span><b>Lodestone does not diagnose.</b> <span class="d">It surfaces support opportunities, not medical conclusions.</span></span></li>
+                    <li class="reveal"><span class="no">P2</span><span><b>Scores are used only for support routing.</b> <span class="d">Never for grading, ranking, or discipline.</span></span></li>
+                    <li class="reveal"><span class="no">P3</span><span><b>Students can opt out of monitoring.</b> <span class="d">Consent is explicit and reversible at any time.</span></span></li>
+                    <li class="reveal"><span class="no">P4</span><span><b>Counselors see indicators, not raw logs.</b> <span class="d">Private activity data stays private.</span></span></li>
+                    <li class="reveal"><span class="no">P5</span><span><b>Sensitive cases route to humans.</b> <span class="d">Straight to counselor support and crisis resources.</span></span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    @* ================================================== Technology ==== *@
+    <section class="section" id="technology" aria-labelledby="tech-title">
+        <div class="shell">
+            <div class="sec-head reveal">
+                <span class="sec-head__index">06 &middot; Built on</span>
+                <h2 id="tech-title">Enterprise-grade .NET, quietly doing its job.</h2>
+            </div>
+            <div class="stack">
+                @foreach (var t in new[] { "ASP.NET Core MVC", "C#", "EF Core", "Identity", "ML.NET", "SignalR", "Hangfire", "Chart.js", "QuestPDF" })
+                {
+                    <span class="chip reveal"><i aria-hidden="true"></i>@t</span>
+                }
+            </div>
+        </div>
+    </section>
+
+    @* ================================================== Final CTA ==== *@
+    <section class="section cta" id="contact" aria-labelledby="cta-title">
+        <div class="shell">
+            <div class="cta__inner">
+                <div class="cta__rule reveal" aria-hidden="true"></div>
+                <h2 id="cta-title" class="reveal">Build a support system that notices earlier.</h2>
+                <p class="reveal">Move from passive self-reporting to proactive, privacy-conscious student support.</p>
+                <div class="cta__actions reveal">
+                    <a class="btn btn--clay" href="/Identity/Account/Login">Get started</a>
+                    <a class="link-underline" href="#">View documentation <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@* ==================================================== Footer ==== *@
+<footer class="footer">
+    <div class="shell footer__inner">
+        <a class="brand" href="#top">Lodestone<span class="brand__dot" aria-hidden="true"></span></a>
+        <ul class="footer__links">
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#technology">Technology</a></li>
+            <li><a href="/Identity/Account/Login">Sign in</a></li>
+        </ul>
+        <small>&copy; @DateTime.Now.Year Lodestone &middot; Privacy-first student wellbeing</small>
+    </div>
+</footer>
