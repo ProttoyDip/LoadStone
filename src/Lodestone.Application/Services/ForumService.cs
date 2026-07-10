@@ -1,28 +1,121 @@
 using Lodestone.Application.DTOs.Forum;
 using Lodestone.Application.Interfaces;
+using Lodestone.Domain.Entities;
+using Lodestone.Domain.Enums;
 
 namespace Lodestone.Application.Services;
 
 public class ForumService : IForumService
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IForumRepository _forumRepository;
     private readonly ICurrentUserService _currentUser;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ForumService(IUnitOfWork unitOfWork, ICurrentUserService currentUser)
+    public ForumService(IForumRepository forumRepository, ICurrentUserService currentUser, IUnitOfWork unitOfWork)
     {
-        _unitOfWork = unitOfWork;
-        _currentUser = currentUser;
+        _forumRepository = forumRepository;
+        _currentUser     = currentUser;
+        _unitOfWork      = unitOfWork;
     }
 
-    public Task<IReadOnlyList<ForumPostDto>> GetPostsAsync(int categoryId, CancellationToken cancellationToken = default)
-        => throw new NotImplementedException();
+    public async Task<IReadOnlyList<ForumCategoryDto>> GetCategoriesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        var categories = await _forumRepository.GetCategoriesAsync(cancellationToken);
+        return categories
+            .Select(c => new ForumCategoryDto(
+                c.Id, c.Name, c.Description,
+                c.Posts.Count(p => p.Status == ForumPostStatus.Published && !p.IsDeleted)))
+            .ToList()
+            .AsReadOnly();
+    }
 
-    public Task<ForumPostDto> CreatePostAsync(CreateForumPostDto dto, CancellationToken cancellationToken = default)
-        => throw new NotImplementedException();
+    public async Task<IReadOnlyList<ForumPostDto>> GetPostsAsync(
+        int categoryId, CancellationToken cancellationToken = default)
+    {
+        var posts = await _forumRepository.GetPostsByCategoryAsync(categoryId, cancellationToken);
+        return posts.Select(MapToDto).ToList().AsReadOnly();
+    }
 
-    public Task<ForumCommentDto> AddCommentAsync(CreateForumCommentDto dto, CancellationToken cancellationToken = default)
-        => throw new NotImplementedException();
+    public async Task<ForumPostDetailDto?> GetPostWithCommentsAsync(
+        int postId, CancellationToken cancellationToken = default)
+    {
+        var post = await _forumRepository.GetPostWithCommentsAsync(postId, cancellationToken);
+        if (post is null) return null;
 
-    public Task FlagPostAsync(int postId, string reason, CancellationToken cancellationToken = default)
-        => throw new NotImplementedException();
+        var comments = post.Comments
+            .OrderBy(c => c.CreatedAtUtc)
+            .Select(c => new ForumCommentDto(c.Id, c.ForumPostId, c.AuthorUserId, c.Body, c.CreatedAtUtc))
+            .ToList()
+            .AsReadOnly();
+
+        return new ForumPostDetailDto(
+            post.Id, post.ForumCategoryId, post.Category?.Name ?? string.Empty,
+            post.AuthorUserId, post.Title, post.Body, post.CreatedAtUtc, comments);
+    }
+
+    public async Task<ForumPostDto> CreatePostAsync(
+        CreateForumPostDto dto, CancellationToken cancellationToken = default)
+    {
+        var userId = _currentUser.UserId ?? throw new InvalidOperationException("User not authenticated.");
+
+        var post = new ForumPost
+        {
+            ForumCategoryId = dto.CategoryId,
+            AuthorUserId    = userId,
+            Title           = dto.Title.Trim(),
+            Body            = dto.Body.Trim(),
+            Status          = ForumPostStatus.Published,
+            CreatedAtUtc    = DateTime.UtcNow,
+        };
+
+        await _forumRepository.AddPostAsync(post, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return MapToDto(post);
+    }
+
+    public async Task<ForumCommentDto> AddCommentAsync(
+        CreateForumCommentDto dto, CancellationToken cancellationToken = default)
+    {
+        var userId = _currentUser.UserId ?? throw new InvalidOperationException("User not authenticated.");
+
+        var comment = new ForumComment
+        {
+            ForumPostId  = dto.PostId,
+            AuthorUserId = userId,
+            Body         = dto.Body.Trim(),
+            CreatedAtUtc = DateTime.UtcNow,
+        };
+
+        await _forumRepository.AddCommentAsync(comment, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return new ForumCommentDto(comment.Id, comment.ForumPostId, comment.AuthorUserId, comment.Body, comment.CreatedAtUtc);
+    }
+
+    public async Task FlagPostAsync(int postId, string reason, CancellationToken cancellationToken = default)
+    {
+        var userId = _currentUser.UserId ?? throw new InvalidOperationException("User not authenticated.");
+
+        var post = await _forumRepository.GetPostByIdAsync(postId, cancellationToken)
+            ?? throw new InvalidOperationException($"Post {postId} not found.");
+
+        var flag = new ForumFlag
+        {
+            ForumPostId  = postId,
+            RaisedByUserId = userId,
+            Reason       = reason.Trim(),
+            CreatedAtUtc = DateTime.UtcNow,
+        };
+
+        await _forumRepository.AddFlagAsync(flag, cancellationToken);
+
+        // Automatically move to UnderReview when flagged.
+        post.Status = ForumPostStatus.Flagged;
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
+
+    private static ForumPostDto MapToDto(ForumPost p)
+        => new(p.Id, p.ForumCategoryId, p.AuthorUserId, p.Title, p.Body, p.Status, p.CreatedAtUtc);
 }

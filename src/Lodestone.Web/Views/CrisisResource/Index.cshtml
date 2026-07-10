@@ -1,5 +1,141 @@
+@model Lodestone.Web.ViewModels.CrisisResource.CrisisResourceViewModel
 @{
     ViewData["Title"] = "Crisis Resources";
 }
-<h1>Crisis Resources</h1>
-<p>Lodestone — placeholder view. Wire up the view model in the corresponding controller action.</p>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/crisis-resource.css" asp-append-version="true" />
+}
+
+<div class="crisis-page">
+    <section class="crisis-hero" aria-labelledby="crisis-title">
+        <div class="crisis-shell crisis-hero__grid">
+            <div>
+                <p class="crisis-kicker"><span aria-hidden="true"></span>Immediate support</p>
+                <h1 id="crisis-title">You do not have to face this moment alone.</h1>
+                <p class="crisis-hero__lead">
+                    If you or someone else is in immediate danger, contact local emergency services now.
+                    For other urgent support, use one of the confidential resources below.
+                </p>
+            </div>
+
+            <aside class="crisis-notice" aria-label="Immediate danger guidance">
+                <span class="crisis-notice__label">Immediate danger</span>
+                <strong>Call your local emergency number.</strong>
+                <p>Move to a safer place if you can, and stay with someone you trust while help is on the way.</p>
+            </aside>
+        </div>
+    </section>
+
+    <main class="crisis-shell crisis-content">
+        @if (Model.EmergencyResources.Count > 0)
+        {
+            <section class="crisis-section" aria-labelledby="urgent-support-title">
+                <div class="crisis-section__head">
+                    <span class="crisis-section__index">01</span>
+                    <div>
+                        <h2 id="urgent-support-title">Urgent support</h2>
+                        <p>Free and confidential services intended for immediate or crisis-level support.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-grid crisis-grid--urgent">
+                    @foreach (var resource in Model.EmergencyResources)
+                    {
+                        var telephone = resource.PhoneNumber?.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
+                        <article class="resource-card resource-card--urgent">
+                            <span class="resource-card__tag">Urgent</span>
+                            <h3>@resource.Title</h3>
+                            @if (!string.IsNullOrWhiteSpace(resource.Description))
+                            {
+                                <p>@resource.Description</p>
+                            }
+                            <div class="resource-card__actions">
+                                @if (!string.IsNullOrWhiteSpace(resource.PhoneNumber))
+                                {
+                                    <a class="resource-action resource-action--primary" href="tel:@telephone">
+                                        Call @resource.PhoneNumber
+                                    </a>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(resource.Url))
+                                {
+                                    <a class="resource-action resource-action--secondary" href="@resource.Url"
+                                       target="@(resource.Url.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? "_blank" : null)"
+                                       rel="@(resource.Url.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? "noopener noreferrer" : null)">
+                                        Visit website <span aria-hidden="true">&rarr;</span>
+                                    </a>
+                                }
+                            </div>
+                        </article>
+                    }
+                </div>
+            </section>
+        }
+
+        @if (Model.SupportResources.Count > 0)
+        {
+            <section class="crisis-section" aria-labelledby="continued-support-title">
+                <div class="crisis-section__head">
+                    <span class="crisis-section__index">02</span>
+                    <div>
+                        <h2 id="continued-support-title">Continued support</h2>
+                        <p>Information, referrals, and people who can help you find a calm next step.</p>
+                    </div>
+                </div>
+
+                <div class="crisis-grid">
+                    @foreach (var resource in Model.SupportResources)
+                    {
+                        var telephone = resource.PhoneNumber?.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
+                        <article class="resource-card">
+                            <span class="resource-card__tag resource-card__tag--support">Support</span>
+                            <h3>@resource.Title</h3>
+                            @if (!string.IsNullOrWhiteSpace(resource.Description))
+                            {
+                                <p>@resource.Description</p>
+                            }
+                            <div class="resource-card__actions">
+                                @if (!string.IsNullOrWhiteSpace(resource.PhoneNumber))
+                                {
+                                    <a class="resource-action resource-action--primary" href="tel:@telephone">
+                                        Call @resource.PhoneNumber
+                                    </a>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(resource.Url))
+                                {
+                                    <a class="resource-action resource-action--secondary" href="@resource.Url"
+                                       target="@(resource.Url.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? "_blank" : null)"
+                                       rel="@(resource.Url.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? "noopener noreferrer" : null)">
+                                        @(resource.Url.StartsWith("/", StringComparison.Ordinal) ? "Open in Lodestone" : "Visit website")
+                                        <span aria-hidden="true">&rarr;</span>
+                                    </a>
+                                }
+                            </div>
+                        </article>
+                    }
+                </div>
+            </section>
+        }
+
+        @if (Model.EmergencyResources.Count == 0 && Model.SupportResources.Count == 0)
+        {
+            <section class="crisis-empty" role="status">
+                <h2>Resources are temporarily unavailable.</h2>
+                <p>If someone is in immediate danger, contact your local emergency services. Please try this page again shortly.</p>
+            </section>
+        }
+
+        <section class="crisis-safety" aria-labelledby="safety-title">
+            <div>
+                <span class="crisis-section__index crisis-section__index--dark">03</span>
+                <h2 id="safety-title">While you wait for support</h2>
+            </div>
+            <ul>
+                <li>Move away from anything that could be used to hurt yourself or someone else.</li>
+                <li>Tell a trusted person what is happening and ask them to stay with you.</li>
+                <li>Go to a public or safer place if being alone feels unsafe.</li>
+                <li>Keep your phone nearby and answer calls from the support service.</li>
+            </ul>
+        </section>
+    </main>
+</div>

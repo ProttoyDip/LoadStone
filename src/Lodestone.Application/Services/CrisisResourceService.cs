@@ -5,10 +5,10 @@ namespace Lodestone.Application.Services;
 
 public class CrisisResourceService : ICrisisResourceService
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICrisisResourceRepository _repository;
 
-    public CrisisResourceService(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    public CrisisResourceService(ICrisisResourceRepository repository) => _repository = repository;
 
     public Task<IReadOnlyList<CrisisResource>> GetActiveResourcesAsync(CancellationToken cancellationToken = default)
-        => throw new NotImplementedException();
+        => _repository.GetActiveOrderedAsync(cancellationToken);
 }
