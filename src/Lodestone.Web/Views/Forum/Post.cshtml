@@ -1,0 +1,112 @@
+@model Lodestone.Web.ViewModels.Forum.ForumPostDetailViewModel
+@{
+    ViewData["Title"] = Model.Post.Title;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forum.css" asp-append-version="true" />
+}
+
+<div class="forum-page">
+    <section class="forum-subhero forum-subhero--post">
+        <div class="forum-shell">
+            <nav class="forum-breadcrumb" aria-label="Breadcrumb">
+                <a asp-controller="Forum" asp-action="Index">Forum</a>
+                <span aria-hidden="true">/</span>
+                <a asp-controller="Forum" asp-action="Category" asp-route-id="@Model.Post.CategoryId">@Model.Post.CategoryName</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">Discussion</span>
+            </nav>
+        </div>
+    </section>
+
+    <main class="forum-shell forum-content forum-post-page">
+        @if (TempData["Info"] is string infoMessage)
+        {
+            <div class="forum-alert" role="status">@infoMessage</div>
+        }
+
+        <article class="forum-topic" aria-labelledby="post-title">
+            <header class="forum-topic__header">
+                <p class="forum-section-eyebrow">@Model.Post.CategoryName</p>
+                <h1 id="post-title">@Model.Post.Title</h1>
+                <div class="forum-topic__meta">
+                    <span>Shared by a community member</span>
+                    <span aria-hidden="true">·</span>
+                    <time datetime="@Model.Post.CreatedAtUtc.ToString("O")">@Model.Post.CreatedAtUtc.ToString("dd MMM yyyy, HH:mm") UTC</time>
+                </div>
+            </header>
+
+            <div class="forum-topic__body">@Model.Post.Body</div>
+
+            <details class="forum-flag">
+                <summary>Report a concern about this post</summary>
+                <div class="forum-flag__content">
+                    <p>Reporting sends the post to the moderation team for review. Please briefly explain the concern.</p>
+                    <form class="forum-form forum-form--compact" asp-controller="Forum" asp-action="Flag" asp-route-id="@Model.Post.Id" method="post">
+                        <label for="flag-reason">Reason for report</label>
+                        <textarea id="flag-reason" name="reason" rows="3" maxlength="1000" required placeholder="Describe the concern"></textarea>
+                        <button class="ls-btn ls-btn--ghost ls-btn--sm" type="submit">Submit report</button>
+                    </form>
+                </div>
+            </details>
+        </article>
+
+        <section class="forum-replies" aria-labelledby="replies-title">
+            <div class="forum-section-head forum-section-head--compact">
+                <div>
+                    <p class="forum-section-eyebrow">Peer responses</p>
+                    <h2 id="replies-title">@Model.Post.Comments.Count @(Model.Post.Comments.Count == 1 ? "reply" : "replies")</h2>
+                </div>
+                <p>Respond with care and avoid giving professional advice.</p>
+            </div>
+
+            <div class="forum-reply-compose" aria-labelledby="reply-form-title">
+                <h3 id="reply-form-title">Add a considered response</h3>
+                <form class="forum-form" asp-controller="Forum" asp-action="AddComment" method="post">
+                    <input asp-for="NewComment.PostId" type="hidden" value="@Model.Post.Id" />
+                    <div class="forum-field">
+                        <label asp-for="NewComment.Body">Your response</label>
+                        <textarea asp-for="NewComment.Body" rows="5" maxlength="5000" required placeholder="Write a supportive, respectful response." aria-describedby="reply-guidance"></textarea>
+                        <p id="reply-guidance" class="forum-field-guidance">Your response will be visible to other members of the forum.</p>
+                        <span asp-validation-for="NewComment.Body" class="forum-field-error"></span>
+                    </div>
+                    <div class="forum-form__footer">
+                        <p>Keep identifying details private.</p>
+                        <button class="ls-btn ls-btn--clay" type="submit">Post response</button>
+                    </div>
+                </form>
+            </div>
+
+            @if (Model.Post.Comments.Count == 0)
+            {
+                <div class="forum-empty forum-empty--replies">
+                    <span class="forum-empty__index" aria-hidden="true">01</span>
+                    <div>
+                        <h3>No responses yet.</h3>
+                        <p>A thoughtful response can help someone feel heard.</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="forum-comment-list">
+                    @foreach (var comment in Model.Post.Comments)
+                    {
+                        <article class="forum-comment">
+                            <header class="forum-comment__header">
+                                <span>Community member</span>
+                                <time datetime="@comment.CreatedAtUtc.ToString("O")">@comment.CreatedAtUtc.ToString("dd MMM yyyy, HH:mm") UTC</time>
+                            </header>
+                            <div class="forum-comment__body">@comment.Body</div>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
+    </main>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
