@@ -1,0 +1,780 @@
+C:\Users\user\OneDrive\Desktop\SD Project 3.2\LoadStone\src\Lodestone.Application\Lodestone.Application.csproj : warning NU1903: Package 'AutoMapper' 13.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[63]
+      User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+info: Hangfire.SqlServer.SqlServerObjectsInstaller[0]
+      Start installing Hangfire SQL objects...
+info: Hangfire.SqlServer.SqlServerObjectsInstaller[0]
+      Hangfire SQL objects installed.
+dbug: Microsoft.EntityFrameworkCore.Infrastructure[10401]
+      An 'IServiceProvider' was created for internal use by Entity Framework.
+dbug: Microsoft.EntityFrameworkCore.Model[10601]
+      The index {'UserId'} was not created on entity type 'IdentityUserRole<string>' as the properties are already covered by the index {'UserId', 'RoleId'}.
+dbug: Microsoft.EntityFrameworkCore.Model[10601]
+      The index {'UserId'} was not created on entity type 'IdentityUserToken<string>' as the properties are already covered by the index {'UserId', 'LoginProvider', 'Name'}.
+dbug: Microsoft.EntityFrameworkCore.Infrastructure[10403]
+      Entity Framework Core 8.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.0' with options: None
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20005]
+      Creating DbConnection.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20006]
+      Created DbConnection. (1ms).
+dbug: Microsoft.EntityFrameworkCore.Migrations[20400]
+      Migrating using database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteNonQuery' (1ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (11ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteReader'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [MigrationId], [ProductVersion]
+      FROM [__EFMigrationsHistory]
+      ORDER BY [MigrationId];
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [MigrationId], [ProductVersion]
+      FROM [__EFMigrationsHistory]
+      ORDER BY [MigrationId];
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20301]
+      Closing data reader to 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20300]
+      A data reader for 'Lodestone' on server '.\SQLEXPRESS' is being disposed after spending 3ms reading results.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+info: Microsoft.EntityFrameworkCore.Migrations[20405]
+      No migrations were applied. The database is already up to date.
+dbug: Microsoft.EntityFrameworkCore.Query[10111]
+      Compiling query expression: 
+      'DbSet<IdentityRole>()
+          .FirstOrDefault(r => r.NormalizedName == __normalizedName_0)'
+dbug: Microsoft.EntityFrameworkCore.Query[10107]
+      Generated query execution expression: 
+      'queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<IdentityRole>(
+          asyncEnumerable: new SingleQueryingEnumerable<IdentityRole>(
+              (RelationalQueryContext)queryContext, 
+              RelationalCommandCache.QueryExpression(
+                  Projection Mapping:
+                      EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: IdentityRole.Id (string) Required PK AfterSave:Throw, 0], [Property: IdentityRole.ConcurrencyStamp (string) Concurrency, 1], [Property: IdentityRole.Name (string) MaxLength(256), 2], [Property: IdentityRole.NormalizedName (string) Index MaxLength(256), 3] }
+                  SELECT TOP(1) a.Id, a.ConcurrencyStamp, a.Name, a.NormalizedName
+                  FROM AspNetRoles AS a
+                  WHERE a.NormalizedName == @__normalizedName_0), 
+              null, 
+              Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, IdentityRole>, 
+              Lodestone.Infrastructure.Data.ApplicationDbContext, 
+              False, 
+              False, 
+              True
+          ), 
+          cancellationToken: queryContext.CancellationToken)'
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteReader'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteReader' (1ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (13ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+dbug: Microsoft.EntityFrameworkCore.ChangeTracking[10806]
+      Context 'ApplicationDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20301]
+      Closing data reader to 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20300]
+      A data reader for 'Lodestone' on server '.\SQLEXPRESS' is being disposed after spending 38ms reading results.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteReader'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+dbug: Microsoft.EntityFrameworkCore.ChangeTracking[10806]
+      Context 'ApplicationDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20301]
+      Closing data reader to 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20300]
+      A data reader for 'Lodestone' on server '.\SQLEXPRESS' is being disposed after spending 0ms reading results.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteReader'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+dbug: Microsoft.EntityFrameworkCore.ChangeTracking[10806]
+      Context 'ApplicationDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20301]
+      Closing data reader to 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20300]
+      A data reader for 'Lodestone' on server '.\SQLEXPRESS' is being disposed after spending 0ms reading results.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteReader'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+      FROM [AspNetRoles] AS [a]
+      WHERE [a].[NormalizedName] = @__normalizedName_0
+dbug: Microsoft.EntityFrameworkCore.ChangeTracking[10806]
+      Context 'ApplicationDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20301]
+      Closing data reader to 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20300]
+      A data reader for 'Lodestone' on server '.\SQLEXPRESS' is being disposed after spending 0ms reading results.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Infrastructure[10407]
+      'ApplicationDbContext' disposed.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20007]
+      Disposing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20008]
+      Disposed connection to database '' on server '' (0ms).
+dbug: Microsoft.Extensions.Hosting.Internal.Host[1]
+      Hosting starting
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5000
+info: Hangfire.BackgroundJobServer[0]
+      Starting Hangfire Server using job storage: 'SQL Server: .\SQLEXPRESS@LodestoneHangfire'
+info: Hangfire.BackgroundJobServer[0]
+      Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+info: Hangfire.BackgroundJobServer[0]
+      Using the following options for Hangfire Server:
+          Worker count: 20
+          Listening queues: 'default'
+          Shutdown timeout: 00:00:15
+          Schedule polling interval: 00:00:15
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop BackgroundServerProcess:615f04bb has started in 1.941 ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\user\OneDrive\Desktop\SD Project 3.2\LoadStone\src\Lodestone.Web
+dbug: Microsoft.Extensions.Hosting.Internal.Host[2]
+      Hosting started
+info: Hangfire.Server.BackgroundServerProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 successfully announced in 8.5598 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop ServerHeartbeatProcess:2e661947 has started in 0.7352 ms
+info: Hangfire.Server.BackgroundServerProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop ServerWatchdog:bc63097b has started in 0.1719 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop ServerJobCancellationWatcher:d2baead0 has started in 0.1156 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop ExpirationManager:69be9383 has started in 0.1641 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop CountersAggregator:b70720d7 has started in 0.1633 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop SqlServerHeartbeatProcess:cec4d90c has started in 0.1349 ms
+dbug: Hangfire.SqlServer.CountersAggregator[0]
+      Aggregating records in 'Counter' table...
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:715ca8e3 has started in 0.2141 ms
+dbug: Hangfire.SqlServer.ExpirationManager[0]
+      Removing outdated records from the 'AggregatedCounter' table...
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:db2c6eba has started in 0.3642 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:5b8aae67 has started in 0.668 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:9a9648a0 has started in 0.8062 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:2ca1049e has started in 0.9746 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:08d96fa9 has started in 1.0742 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:8d78080c has started in 1.1765 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:5cb2e743 has started in 1.2819 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:748a6784 has started in 1.3753 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:ff0b50a8 has started in 1.4835 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:86a8f6a6 has started in 1.5666 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:a395b8e4 has started in 1.6581 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:69cc343f has started in 1.7676 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:4e85bac8 has started in 1.8966 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:a4372630 has started in 1.9884 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:84803d15 has started in 2.0751 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:5241fd96 has started in 2.1721 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:747a82ee has started in 2.2647 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:df714d68 has started in 2.4349 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop Worker:32c9a722 has started in 2.5591 ms
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop DelayedJobScheduler:4ad2b126 has started in 0.1509 ms
+info: Hangfire.Server.BackgroundServerProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 all the dispatchers started
+dbug: Hangfire.Processing.BackgroundExecution[0]
+      Execution loop RecurringJobScheduler:923018b4 has started in 0.1288 ms
+dbug: Hangfire.SqlServer.ExpirationManager[0]
+      Removing outdated records from the 'Job' table...
+dbug: Hangfire.SqlServer.ExpirationManager[0]
+      Removing outdated records from the 'List' table...
+dbug: Hangfire.SqlServer.ExpirationManager[0]
+      Removing outdated records from the 'Set' table...
+dbug: Hangfire.SqlServer.ExpirationManager[0]
+      Removing outdated records from the 'Hash' table...
+dbug: Hangfire.Server.DelayedJobScheduler[0]
+      2 scheduled job(s) processed by scheduler.
+warn: Hangfire.AutomaticRetryAttribute[0]
+      Failed to process the job '45': an exception occurred. Retry attempt 7 of 10 will be performed in 00:24:32.
+      System.NotImplementedException: The method or operation is not implemented.
+         at Lodestone.Jobs.BackgroundJobs.ForumModerationJob.ExecuteAsync(CancellationToken cancellationToken) in C:\Users\user\OneDrive\Desktop\SD Project 3.2\LoadStone\src\Lodestone.Jobs\BackgroundJobs\ForumModerationJob.cs:line 13
+         at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+         at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+warn: Hangfire.AutomaticRetryAttribute[0]
+      Failed to process the job '47': an exception occurred. Retry attempt 7 of 10 will be performed in 00:25:07.
+      System.NotImplementedException: The method or operation is not implemented.
+         at Lodestone.Jobs.BackgroundJobs.CrisisResourceEscalationJob.ExecuteAsync(CancellationToken cancellationToken) in C:\Users\user\OneDrive\Desktop\SD Project 3.2\LoadStone\src\Lodestone.Jobs\BackgroundJobs\CrisisResourceEscalationJob.cs:line 14
+         at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+         at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://localhost:5000/js/student.js - - -
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://localhost:5000/js/student.js - 200 2508 text/javascript 11.3571ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://localhost:5000/css/student.css - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://localhost:5000/css/student.css - 200 15032 text/css 0.9601ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://localhost:5000/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.HomeController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Lodestone.Web.Controllers.HomeController (Lodestone.Web).
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Index.
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Index executed in 50.1923ms.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.HomeController.Index (Lodestone.Web) in 58.2754ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.HomeController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://localhost:5000/ - 200 - text/html;+charset=utf-8 110.6336ms
+dbug: Hangfire.Server.ServerHeartbeatProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 heartbeat successfully sent
+dbug: Hangfire.Server.ServerHeartbeatProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 heartbeat successfully sent
+dbug: Hangfire.Server.DelayedJobScheduler[0]
+      1 scheduled job(s) processed by scheduler.
+warn: Hangfire.AutomaticRetryAttribute[0]
+      Failed to process the job '43': an exception occurred. Retry attempt 7 of 10 will be performed in 00:25:07.
+      System.NotImplementedException: The method or operation is not implemented.
+         at Lodestone.Jobs.BackgroundJobs.CrisisResourceEscalationJob.ExecuteAsync(CancellationToken cancellationToken) in C:\Users\user\OneDrive\Desktop\SD Project 3.2\LoadStone\src\Lodestone.Jobs\BackgroundJobs\CrisisResourceEscalationJob.cs:line 14
+         at InvokeStub_CrisisResourceEscalationJob.ExecuteAsync(Object, Span`1)
+         at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/Dashboard - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.DashboardController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Index", controller = "Dashboard"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Lodestone.Web.Controllers.DashboardController (Lodestone.Web).
+info: Microsoft.AspNetCore.Mvc.RedirectToActionResult[1]
+      Executing RedirectResult, redirecting to /Student.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.DashboardController.Index (Lodestone.Web) in 5.1452ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.DashboardController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/Dashboard - 302 0 - 16.3403ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/Student - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.StudentController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Index", controller = "Student"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Lodestone.Web.Controllers.StudentController (Lodestone.Web).
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Index.
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Index executed in 19.2155ms.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.StudentController.Index (Lodestone.Web) in 19.6186ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.StudentController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/Student - 200 - text/html;+charset=utf-8 25.5658ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/css/student.css - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/css/site.css - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/js/site.js - - -
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[6]
+      The file /js/site.js was not modified
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[6]
+      The file /css/site.css was not modified
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/js/student.js - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/css/site.css - 304 - text/css 1.9795ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/js/site.js - 304 - text/javascript 0.3094ms
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[2]
+      Sending file. Request path: '/js/student.js'. Physical path: 'C:\Users\user\OneDrive\Desktop\SD Project 3.2\LoadStone\src\Lodestone.Web\wwwroot\js\student.js'
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[2]
+      Sending file. Request path: '/css/student.css'. Physical path: 'C:\Users\user\OneDrive\Desktop\SD Project 3.2\LoadStone\src\Lodestone.Web\wwwroot\css\student.css'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/css/student.css - 200 15032 text/css 3.6760ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/js/student.js - 200 2508 text/javascript 1.4686ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - 404 0 - 9.9874ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/lib/jquery/dist/jquery.min.js, Response status code: 404
+dbug: Hangfire.Server.ServerHeartbeatProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 heartbeat successfully sent
+dbug: Hangfire.Server.ServerHeartbeatProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 heartbeat successfully sent
+dbug: Hangfire.Server.ServerHeartbeatProcess[0]
+      Server desktop-f5ata0b:9444:d7ab0106 heartbeat successfully sent
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/Journal - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.JournalController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Index", controller = "Journal"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Lodestone.Web.Controllers.JournalController (Lodestone.Web).
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Index.
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Index executed in 2.3952ms.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.JournalController.Index (Lodestone.Web) in 2.7003ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.JournalController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/Journal - 200 - text/html;+charset=utf-8 5.2882ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - 404 0 - 0.8396ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/lib/jquery/dist/jquery.min.js, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.HomeController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Lodestone.Web.Controllers.HomeController (Lodestone.Web).
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Index.
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Index executed in 1.0398ms.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.HomeController.Index (Lodestone.Web) in 1.2451ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.HomeController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/ - 200 - text/html;+charset=utf-8 2.2061ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/css/landing.css?v=zNzNUsHiMIGRyEvQ-R7i6nl8YnzvGoQdZ5OhluwVMto - - -
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[6]
+      The file /css/landing.css was not modified
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/css/landing.css?v=zNzNUsHiMIGRyEvQ-R7i6nl8YnzvGoQdZ5OhluwVMto - 304 - text/css 0.3945ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/js/landing.js?v=vgjTpusv8ZBr5ST90cfEjhGv0JB0NWoOKFFNO-H1nmM - - -
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[6]
+      The file /js/landing.js was not modified
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/js/landing.js?v=vgjTpusv8ZBr5ST90cfEjhGv0JB0NWoOKFFNO-H1nmM - 304 - text/javascript 0.3817ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.AccountController.Login (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(System.String) on controller Lodestone.Web.Controllers.AccountController (Lodestone.Web).
+dbug: Microsoft.EntityFrameworkCore.Infrastructure[10403]
+      Entity Framework Core 8.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.0' with options: None
+dbug: Microsoft.EntityFrameworkCore.Query[10111]
+      Compiling query expression: 
+      'DbSet<ApplicationUser>()
+          .FirstOrDefault(e => EF.Property<string>(e, "Id") == __p_0)'
+dbug: Microsoft.EntityFrameworkCore.Query[10107]
+      Generated query execution expression: 
+      'queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<ApplicationUser>(
+          asyncEnumerable: new SingleQueryingEnumerable<ApplicationUser>(
+              (RelationalQueryContext)queryContext, 
+              RelationalCommandCache.QueryExpression(
+                  Projection Mapping:
+                      EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: ApplicationUser.Id (string) Required PK AfterSave:Throw, 0], [Property: ApplicationUser.AccessFailedCount (int) Required, 1], [Property: ApplicationUser.ConcurrencyStamp (string) Concurrency, 2], [Property: ApplicationUser.CreatedAtUtc (DateTime) Required, 3], [Property: ApplicationUser.Email (string) MaxLength(256), 4], [Property: ApplicationUser.EmailConfirmed (bool) Required, 5], [Property: ApplicationUser.FullName (string) Required, 6], [Property: ApplicationUser.IsActive (bool) Required, 7], [Property: ApplicationUser.LastLoginUtc (DateTime?), 8], [Property: ApplicationUser.LockoutEnabled (bool) Required, 9], [Property: ApplicationUser.LockoutEnd (DateTimeOffset?), 10], [Property: ApplicationUser.NormalizedEmail (string) Index MaxLength(256), 11], [Property: ApplicationUser.NormalizedUserName (string) Index MaxLength(256), 12], [Property: ApplicationUser.PasswordHash (string), 13], [Property: ApplicationUser.PhoneNumber (string), 14], [Property: ApplicationUser.PhoneNumberConfirmed (bool) Required, 15], [Property: ApplicationUser.SecurityStamp (string), 16], [Property: ApplicationUser.TwoFactorEnabled (bool) Required, 17], [Property: ApplicationUser.UserName (string) MaxLength(256), 18] }
+                  SELECT TOP(1) a.Id, a.AccessFailedCount, a.ConcurrencyStamp, a.CreatedAtUtc, a.Email, a.EmailConfirmed, a.FullName, a.IsActive, a.LastLoginUtc, a.LockoutEnabled, a.LockoutEnd, a.NormalizedEmail, a.NormalizedUserName, a.PasswordHash, a.PhoneNumber, a.PhoneNumberConfirmed, a.SecurityStamp, a.TwoFactorEnabled, a.UserName
+                  FROM AspNetUsers AS a
+                  WHERE a.Id == @__p_0), 
+              null, 
+              Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, ApplicationUser>, 
+              Lodestone.Infrastructure.Data.ApplicationDbContext, 
+              False, 
+              False, 
+              True
+          ), 
+          cancellationToken: queryContext.CancellationToken)'
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20005]
+      Creating DbConnection.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20006]
+      Created DbConnection. (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteReader'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[@__p_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAtUtc], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastLoginUtc], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+      FROM [AspNetUsers] AS [a]
+      WHERE [a].[Id] = @__p_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAtUtc], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastLoginUtc], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+      FROM [AspNetUsers] AS [a]
+      WHERE [a].[Id] = @__p_0
+dbug: Microsoft.EntityFrameworkCore.ChangeTracking[10806]
+      Context 'ApplicationDbContext' started tracking 'ApplicationUser' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20301]
+      Closing data reader to 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20300]
+      A data reader for 'Lodestone' on server '.\SQLEXPRESS' is being disposed after spending 30ms reading results.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Query[10111]
+      Compiling query expression: 
+      'DbSet<IdentityUserRole<string>>()
+          .Join(
+              inner: DbSet<IdentityRole>(), 
+              outerKeySelector: userRole => userRole.RoleId, 
+              innerKeySelector: role => role.Id, 
+              resultSelector: (userRole, role) => new { 
+                  userRole = userRole, 
+                  role = role
+               })
+          .Where(<>h__TransparentIdentifier0 => <>h__TransparentIdentifier0.userRole.UserId.Equals(__userId_0))
+          .Select(<>h__TransparentIdentifier0 => <>h__TransparentIdentifier0.role.Name)'
+dbug: Microsoft.EntityFrameworkCore.Query[10107]
+      Generated query execution expression: 
+      'queryContext => new SingleQueryingEnumerable<string>(
+          (RelationalQueryContext)queryContext, 
+          RelationalCommandCache.QueryExpression(
+              Projection Mapping:
+                  EmptyProjectionMember -> 0
+              SELECT a0.Name
+              FROM AspNetUserRoles AS a
+              INNER JOIN AspNetRoles AS a0 ON a.RoleId == a0.Id
+              WHERE a.UserId == @__userId_0), 
+          null, 
+          Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, string>, 
+          Lodestone.Infrastructure.Data.ApplicationDbContext, 
+          False, 
+          False, 
+          True
+      )'
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20000]
+      Opening connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20001]
+      Opened connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20103]
+      Creating DbCommand for 'ExecuteReader'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20104]
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20106]
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20100]
+      Executing DbCommand [Parameters=[@__userId_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+      SELECT [a0].[Name]
+      FROM [AspNetUserRoles] AS [a]
+      INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+      WHERE [a].[UserId] = @__userId_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+      SELECT [a0].[Name]
+      FROM [AspNetUserRoles] AS [a]
+      INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+      WHERE [a].[UserId] = @__userId_0
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20301]
+      Closing data reader to 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Command[20300]
+      A data reader for 'Lodestone' on server '.\SQLEXPRESS' is being disposed after spending 0ms reading results.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20002]
+      Closing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20003]
+      Closed connection to database 'Lodestone' on server '.\SQLEXPRESS' (0ms).
+info: Microsoft.AspNetCore.Mvc.RedirectToActionResult[1]
+      Executing RedirectResult, redirecting to /Student.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.AccountController.Login (Lodestone.Web) in 112.2857ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.AccountController.Login (Lodestone.Web)'
+dbug: Microsoft.EntityFrameworkCore.Infrastructure[10407]
+      'ApplicationDbContext' disposed.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20007]
+      Disposing connection to database 'Lodestone' on server '.\SQLEXPRESS'.
+dbug: Microsoft.EntityFrameworkCore.Database.Connection[20008]
+      Disposed connection to database '' on server '' (0ms).
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 302 0 - 122.2682ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/Student - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.StudentController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Index", controller = "Student"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Lodestone.Web.Controllers.StudentController (Lodestone.Web).
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Index.
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Index executed in 1.0473ms.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.StudentController.Index (Lodestone.Web) in 1.3542ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.StudentController.Index (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/Student - 200 - text/html;+charset=utf-8 2.2285ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/css/student.css - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/js/student.js - - -
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[6]
+      The file /css/student.css was not modified
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[6]
+      The file /js/student.js was not modified
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/js/student.js - 304 - text/javascript 0.2366ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/css/student.css - 304 - text/css 0.3302ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - 404 0 - 0.9005ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/lib/jquery/dist/jquery.min.js, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost:5000/Account/Logout - application/x-www-form-urlencoded 225
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.AccountController.Logout (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Logout", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Logout() on controller Lodestone.Web.Controllers.AccountController (Lodestone.Web).
+info: Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler[11]
+      AuthenticationScheme: Identity.Application signed out.
+info: Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler[11]
+      AuthenticationScheme: Identity.External signed out.
+info: Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler[11]
+      AuthenticationScheme: Identity.TwoFactorUserId signed out.
+info: Microsoft.AspNetCore.Mvc.RedirectToActionResult[1]
+      Executing RedirectResult, redirecting to /Account/Login.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.AccountController.Logout (Lodestone.Web) in 7.0088ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.AccountController.Logout (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://localhost:5000/Account/Logout - 302 0 - 10.9616ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Lodestone.Web.Controllers.AccountController.Login (Lodestone.Web)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(System.String) on controller Lodestone.Web.Controllers.AccountController (Lodestone.Web).
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Login.
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Login executed in 23.4302ms.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action Lodestone.Web.Controllers.AccountController.Login (Lodestone.Web) in 24.7876ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Lodestone.Web.Controllers.AccountController.Login (Lodestone.Web)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 - text/html;+charset=utf-8 25.0608ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/css/auth.css?v=jocPo0N6lXa_ExvaAg2Lk1KVuFWrC78n42phdM6lI5s - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - - -
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[6]
+      The file /css/auth.css was not modified
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/css/auth.css?v=jocPo0N6lXa_ExvaAg2Lk1KVuFWrC78n42phdM6lI5s - 304 - text/css 0.3277ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/lib/jquery/dist/jquery.min.js - 404 0 - 0.3009ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/lib/jquery/dist/jquery.min.js, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/lib/jquery-validation/dist/jquery.validate.min.js - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/lib/jquery-validation/dist/jquery.validate.min.js - 404 0 - 0.2166ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/lib/jquery-validation/dist/jquery.validate.min.js, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 404 0 - 0.1548ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js, Response status code: 404

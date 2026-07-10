@@ -1,5 +1,289 @@
 @{
-    ViewData["Title"] = "Students";
+    ViewData["Title"] = "Student Home";
+    var displayName = User.Identity?.Name;
+    var firstName = string.IsNullOrWhiteSpace(displayName) ? "there" : displayName.Split('@')[0];
 }
-<h1>Students</h1>
-<p>Lodestone — placeholder view. Wire up the view model in the corresponding controller action.</p>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/student.css" asp-append-version="true" />
+}
+
+<div class="student-page">
+    <section class="student-hero" aria-labelledby="student-title">
+        <div class="student-shell student-hero__grid">
+            <div class="student-hero__copy student-reveal">
+                <p class="student-kicker">
+                    <span aria-hidden="true"></span>
+                    Student wellbeing home
+                </p>
+                <h1 id="student-title">Hi @firstName, your support space is ready.</h1>
+                <p class="student-hero__lead">
+                    Check in privately, find peer support, book counselor time, and keep crisis resources within reach.
+                </p>
+                <div class="student-hero__actions" aria-label="Primary student actions">
+                    <a class="student-btn student-btn--primary" asp-controller="Journal" asp-action="Index">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5v-13Z" /><path d="M8 7h8M8 11h6M8 15h7" /></svg>
+                        Start check-in
+                    </a>
+                    <a class="student-btn student-btn--secondary" asp-controller="Booking" asp-action="Index">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v4M17 3v4M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" /><path d="M8 13h4M8 17h8" /></svg>
+                        Book counselor
+                    </a>
+                </div>
+            </div>
+
+            <div class="student-visual student-reveal" aria-label="Student support pathway preview">
+                <div class="student-visual__header">
+                    <span>Today</span>
+                    <strong>Support pathway</strong>
+                </div>
+                <div class="student-pathway">
+                    <article class="pathway-card pathway-card--active">
+                        <span class="pathway-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 8v5l3 2" /><circle cx="12" cy="12" r="9" /></svg>
+                        </span>
+                        <div>
+                            <h2>Gentle check-in</h2>
+                            <p>Optional reflection available</p>
+                        </div>
+                    </article>
+                    <article class="pathway-card">
+                        <span class="pathway-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16" /><path d="M8 15v-4M12 15V8M16 15v-2" /></svg>
+                        </span>
+                        <div>
+                            <h2>Activity rhythm</h2>
+                            <p>Support signals stay private</p>
+                        </div>
+                    </article>
+                    <article class="pathway-card">
+                        <span class="pathway-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.8" /></svg>
+                        </span>
+                        <div>
+                            <h2>Human support</h2>
+                            <p>Peers and counselors when needed</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="student-visual__footer">
+                    <span class="student-status-dot" aria-hidden="true"></span>
+                    Crisis resources remain available without sign-in.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="student-shell student-quick-actions" aria-label="Student quick actions">
+        <a class="quick-action student-reveal" asp-controller="Journal" asp-action="Index">
+            <span class="quick-action__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 0-3 3V4Z" /><path d="M9 8h5M9 12h6" /></svg>
+            </span>
+            <span>
+                <strong>Mood journal</strong>
+                <small>Private reflection</small>
+            </span>
+        </a>
+        <a class="quick-action student-reveal" asp-controller="Forum" asp-action="Index">
+            <span class="quick-action__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-8 8H7l-4 2 1.4-4.3A8 8 0 1 1 21 12Z" /></svg>
+            </span>
+            <span>
+                <strong>Peer forum</strong>
+                <small>Moderated support</small>
+            </span>
+        </a>
+        <a class="quick-action student-reveal" asp-controller="Booking" asp-action="Index">
+            <span class="quick-action__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 3v4M17 3v4M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" /></svg>
+            </span>
+            <span>
+                <strong>Counselor booking</strong>
+                <small>Schedule support</small>
+            </span>
+        </a>
+        <a class="quick-action quick-action--urgent student-reveal" asp-controller="CrisisResource" asp-action="Index">
+            <span class="quick-action__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+            </span>
+            <span>
+                <strong>Crisis resources</strong>
+                <small>Immediate help</small>
+            </span>
+        </a>
+    </section>
+
+    <section class="student-shell student-section" aria-labelledby="planner-title">
+        <div class="student-section__head student-reveal">
+            <span class="section-index">01</span>
+            <div>
+                <h2 id="planner-title">Your support planner</h2>
+                <p>Low-pressure actions grouped by when they are most useful.</p>
+            </div>
+        </div>
+
+        <div class="student-planner student-reveal">
+            <div class="planner-tabs" role="tablist" aria-label="Support planner">
+                <button class="planner-tab is-active" type="button" role="tab" id="student-tab-today" aria-controls="student-panel-today" aria-selected="true">Today</button>
+                <button class="planner-tab" type="button" role="tab" id="student-tab-week" aria-controls="student-panel-week" aria-selected="false" tabindex="-1">This week</button>
+                <button class="planner-tab" type="button" role="tab" id="student-tab-anytime" aria-controls="student-panel-anytime" aria-selected="false" tabindex="-1">Anytime</button>
+            </div>
+
+            <div class="planner-panel is-active" id="student-panel-today" role="tabpanel" aria-labelledby="student-tab-today">
+                <article>
+                    <span class="student-badge student-badge--soft">Optional</span>
+                    <h3>Check how the day feels</h3>
+                    <p>A short private journal entry can help you name what is happening before it piles up.</p>
+                    <a asp-controller="Journal" asp-action="Index">Open journal <span aria-hidden="true">-&gt;</span></a>
+                </article>
+                <article>
+                    <span class="student-badge student-badge--green">Available</span>
+                    <h3>Find a calm next step</h3>
+                    <p>Use booking or peer support when you want a person involved.</p>
+                    <a asp-controller="Booking" asp-action="Index">View booking <span aria-hidden="true">-&gt;</span></a>
+                </article>
+            </div>
+
+            <div class="planner-panel" id="student-panel-week" role="tabpanel" aria-labelledby="student-tab-week" hidden>
+                <article>
+                    <span class="student-badge">Weekly</span>
+                    <h3>Review your rhythm</h3>
+                    <p>Learning activity patterns can suggest support, but they are not a diagnosis or grade.</p>
+                    <a asp-controller="Dashboard" asp-action="Index">Open dashboard <span aria-hidden="true">-&gt;</span></a>
+                </article>
+                <article>
+                    <span class="student-badge student-badge--green">Moderated</span>
+                    <h3>Reconnect with peers</h3>
+                    <p>Drop into a forum category when classes, deadlines, or group work feel heavy.</p>
+                    <a asp-controller="Forum" asp-action="Index">Open forum <span aria-hidden="true">-&gt;</span></a>
+                </article>
+            </div>
+
+            <div class="planner-panel" id="student-panel-anytime" role="tabpanel" aria-labelledby="student-tab-anytime" hidden>
+                <article>
+                    <span class="student-badge student-badge--urgent">Always on</span>
+                    <h3>Reach urgent support</h3>
+                    <p>Crisis resources are kept separate from login so help is reachable quickly.</p>
+                    <a asp-controller="CrisisResource" asp-action="Index">Open resources <span aria-hidden="true">-&gt;</span></a>
+                </article>
+                <article>
+                    <span class="student-badge">Private</span>
+                    <h3>Control what you share</h3>
+                    <p>Your journal stays private, and support queues use only the minimum context needed to help.</p>
+                    <a asp-controller="Student" asp-action="Index" asp-fragment="privacy">Privacy details <span aria-hidden="true">-&gt;</span></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="student-shell student-section" aria-labelledby="snapshot-title">
+        <div class="student-section__head student-reveal">
+            <span class="section-index">02</span>
+            <div>
+                <h2 id="snapshot-title">Weekly snapshot</h2>
+                <p>Clear signals without turning wellbeing into a scoreboard.</p>
+            </div>
+        </div>
+
+        <div class="student-bento">
+            <article class="student-card student-card--wide student-reveal">
+                <div class="student-card__top">
+                    <div>
+                        <span class="student-eyebrow">Learning rhythm</span>
+                        <h3>Engagement is steady with one lighter day.</h3>
+                    </div>
+                    <span class="student-badge student-badge--green">Low pressure</span>
+                </div>
+                <div class="rhythm-chart" aria-label="Weekly activity rhythm preview">
+                    <span style="height: 58%"><b>Mon</b></span>
+                    <span style="height: 72%"><b>Tue</b></span>
+                    <span style="height: 46%"><b>Wed</b></span>
+                    <span style="height: 66%"><b>Thu</b></span>
+                    <span style="height: 38%"><b>Fri</b></span>
+                </div>
+            </article>
+
+            <article class="student-card student-reveal">
+                <span class="student-eyebrow">Next booking</span>
+                <h3>No session booked</h3>
+                <p>Choose a counselor slot when you want a private conversation.</p>
+                <a class="student-card__link" asp-controller="Booking" asp-action="Index">Find time</a>
+            </article>
+
+            <article class="student-card student-reveal">
+                <span class="student-eyebrow">Nudge status</span>
+                <h3>No urgent alert</h3>
+                <p>Any check-in prompt stays optional and support-focused.</p>
+                <div class="mini-progress" aria-hidden="true"><span></span></div>
+            </article>
+
+            <article class="student-card student-card--accent student-reveal">
+                <span class="student-eyebrow">Private journal</span>
+                <h3>One reflection can be enough.</h3>
+                <p>Capture what changed this week, then decide whether to involve support.</p>
+                <a class="student-card__link" asp-controller="Journal" asp-action="Index">Write entry</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="student-shell student-section" aria-labelledby="pathways-title">
+        <div class="student-section__head student-reveal">
+            <span class="section-index">03</span>
+            <div>
+                <h2 id="pathways-title">Support pathways</h2>
+                <p>Pick the level of support that fits the moment.</p>
+            </div>
+        </div>
+
+        <div class="pathway-grid">
+            <article class="pathway-tile student-reveal">
+                <span class="pathway-tile__number">01</span>
+                <h3>Private reflection</h3>
+                <p>Use the mood journal for thoughts you do not want in a forum or queue.</p>
+            </article>
+            <article class="pathway-tile student-reveal">
+                <span class="pathway-tile__number">02</span>
+                <h3>Peer support</h3>
+                <p>Talk through common class pressure with moderated student communities.</p>
+            </article>
+            <article class="pathway-tile student-reveal">
+                <span class="pathway-tile__number">03</span>
+                <h3>Counselor care</h3>
+                <p>Book a counselor session when you want confidential human support.</p>
+            </article>
+            <article class="pathway-tile pathway-tile--urgent student-reveal">
+                <span class="pathway-tile__number">04</span>
+                <h3>Immediate resources</h3>
+                <p>Open crisis support directly, even if you are signed out.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="student-privacy" id="privacy" aria-labelledby="privacy-title">
+        <div class="student-shell student-privacy__grid">
+            <div class="student-reveal">
+                <span class="section-index">04</span>
+                <h2 id="privacy-title">Privacy stays part of the support plan.</h2>
+                <p>Lodestone is designed to route care, not to expose private student life.</p>
+            </div>
+            <div class="privacy-list student-reveal">
+                <article>
+                    <strong>Journal entries are private</strong>
+                    <span>They are not shown in public forums or raw activity views.</span>
+                </article>
+                <article>
+                    <strong>Risk signals are not diagnoses</strong>
+                    <span>They only suggest when a human support pathway may help.</span>
+                </article>
+                <article>
+                    <strong>Crisis access stays visible</strong>
+                    <span>Urgent resources are available outside the authenticated app.</span>
+                </article>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="~/js/student.js"></script>
+}

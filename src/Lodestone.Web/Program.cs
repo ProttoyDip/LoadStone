@@ -19,8 +19,13 @@ var initializeDatabase = builder.Configuration.GetValue("Startup:InitializeDatab
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 // ---- MVC + Web-only services ----
-builder.Services.AddControllersWithViews();
+builder.Services.AddHttpsRedirection(options => options.HttpsPort = 5001);
+var mvcBuilder = builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages(); // Identity UI area
+if (builder.Environment.IsDevelopment())
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
 builder.Services.AddSignalR();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
