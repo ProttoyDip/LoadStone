@@ -1,5 +1,7 @@
+using FluentValidation;
 using Lodestone.Application.DTOs.Forum;
 using Lodestone.Application.Interfaces;
+using Lodestone.Domain.Constants;
 using Lodestone.Web.ViewModels.Forum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,85 +12,124 @@ namespace Lodestone.Web.Controllers;
 public class ForumController : Controller
 {
     private readonly IForumService _forumService;
+    private readonly IValidator<CreateForumPostDto> _postValidator;
+    private readonly IValidator<CreateForumCommentDto> _commentValidator;
 
-    public ForumController(IForumService forumService) => _forumService = forumService;
-
-    // GET /Forum — category index
-    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    public ForumController(
+        IForumService forumService,
+        IValidator<CreateForumPostDto> postValidator,
+        IValidator<CreateForumCommentDto> commentValidator)
     {
-        var categories = await _forumService.GetCategoriesAsync(cancellationToken);
-        return View(new ForumIndexViewModel { Categories = categories });
+        _forumService = forumService;
+        _postValidator = postValidator;
+        _commentValidator = commentValidator;
     }
 
-    // GET /Forum/Category/{id}
+    [HttpGet]
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+        => View(new ForumIndexViewModel
+        {
+            Categories = await _forumService.GetCategoriesAsync(cancellationToken)
+        });
+
+    [HttpGet]
     public async Task<IActionResult> Category(int id, CancellationToken cancellationToken)
-    {
-        var posts = await _forumService.GetPostsAsync(id, cancellationToken);
-        var vm = new ForumCategoryViewModel
+        => View(new ForumCategoryViewModel
         {
             CategoryId = id,
-            Posts      = posts,
-            NewPost    = new CreateForumPostDto(id, string.Empty, string.Empty),
-        };
-        return View(vm);
-    }
+            Posts = await _forumService.GetPostsAsync(id, cancellationToken),
+            NewPost = new CreateForumPostDto(id, string.Empty, string.Empty)
+        });
 
-    // GET /Forum/Post/{id}
+    [HttpGet]
     public async Task<IActionResult> Post(int id, CancellationToken cancellationToken)
     {
         var post = await _forumService.GetPostWithCommentsAsync(id, cancellationToken);
-        if (post is null) return NotFound();
-        return View(new ForumPostDetailViewModel
-        {
-            Post       = post,
-            NewComment = new CreateForumCommentDto(id, string.Empty),
-        });
+        return post is null
+            ? NotFound()
+            : View(new ForumPostDetailViewModel
+            {
+                Post = post,
+                NewComment = new CreateForumCommentDto(id, string.Empty)
+            });
     }
 
-    // POST /Forum/CreatePost
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreatePost(CreateForumPostDto model, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreatePost(
+        [Bind(Prefix = nameof(ForumCategoryViewModel.NewPost))] CreateForumPostDto newPost,
+        CancellationToken cancellationToken)
     {
-        if (!ModelState.IsValid || string.IsNullOrWhiteSpace(model.Title) || string.IsNullOrWhiteSpace(model.Body))
+        var validation = await _postValidator.ValidateAsync(newPost, cancellationToken);
+        if (!validation.IsValid)
         {
-            ModelState.AddModelError(string.Empty, "Title and body are required.");
-            var posts = await _forumService.GetPostsAsync(model.CategoryId, cancellationToken);
+            AddValidationErrors(validation, nameof(ForumCategoryViewModel.NewPost));
             return View("Category", new ForumCategoryViewModel
             {
-                CategoryId = model.CategoryId,
-                Posts      = posts,
-                NewPost    = model,
+                CategoryId = newPost.CategoryId,
+                Posts = await _forumService.GetPostsAsync(newPost.CategoryId, cancellationToken),
+                NewPost = newPost
             });
         }
 
-        var created = await _forumService.CreatePostAsync(model, cancellationToken);
+        var created = await _forumService.CreatePostAsync(newPost, cancellationToken);
+        TempData["ForumSuccess"] = "Your discussion has been published.";
         return RedirectToAction(nameof(Post), new { id = created.Id });
     }
 
-    // POST /Forum/AddComment
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddComment(CreateForumCommentDto model, CancellationToken cancellationToken)
+    public async Task<IActionResult> AddComment(
+        [Bind(Prefix = nameof(ForumPostDetailViewModel.NewComment))] CreateForumCommentDto newComment,
+        CancellationToken cancellationToken)
     {
-        if (!ModelState.IsValid || string.IsNullOrWhiteSpace(model.Body))
+        var validation = await _commentValidator.ValidateAsync(newComment, cancellationToken);
+        if (!validation.IsValid)
         {
-            return RedirectToAction(nameof(Post), new { id = model.PostId });
+            AddValidationErrors(validation, nameof(ForumPostDetailViewModel.NewComment));
+            var post = await _forumService.GetPostWithCommentsAsync(newComment.PostId, cancellationToken);
+            if (post is null) return NotFound();
+            return View("Post", new ForumPostDetailViewModel { Post = post, NewComment = newComment });
         }
 
-        await _forumService.AddCommentAsync(model, cancellationToken);
-        return RedirectToAction(nameof(Post), new { id = model.PostId });
+        await _forumService.AddCommentAsync(newComment, cancellationToken);
+        TempData["ForumSuccess"] = "Your reply has been added.";
+        return RedirectToAction(nameof(Post), new { id = newComment.PostId });
     }
 
-    // POST /Forum/Flag/{id}
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Flag(int id, string reason, CancellationToken cancellationToken)
     {
-        if (!string.IsNullOrWhiteSpace(reason))
-            await _forumService.FlagPostAsync(id, reason, cancellationToken);
+        if (string.IsNullOrWhiteSpace(reason) || reason.Trim().Length > 500)
+        {
+            TempData["ForumError"] = "Please provide a brief reason (up to 500 characters) for the report.";
+            return RedirectToAction(nameof(Post), new { id });
+        }
 
-        TempData["Info"] = "Post has been flagged for review.";
-        return RedirectToAction(nameof(Post), new { id });
+        await _forumService.FlagPostAsync(id, reason, cancellationToken);
+        TempData["ForumSuccess"] = "Thank you. The post has been sent for review.";
+        return RedirectToAction(nameof(Index));
+    }
+
+    [Authorize(Policy = PolicyConstants.CanModerateForum)]
+    [HttpGet]
+    public async Task<IActionResult> Moderation(CancellationToken cancellationToken)
+        => View(await _forumService.GetFlaggedPostsAsync(cancellationToken));
+
+    [Authorize(Policy = PolicyConstants.CanModerateForum)]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Review(int postId, bool publish, CancellationToken cancellationToken)
+    {
+        await _forumService.ReviewPostAsync(postId, publish, cancellationToken);
+        TempData["ForumSuccess"] = publish ? "The post has been restored." : "The post has been removed.";
+        return RedirectToAction(nameof(Moderation));
+    }
+
+    private void AddValidationErrors(FluentValidation.Results.ValidationResult validation, string prefix)
+    {
+        foreach (var error in validation.Errors)
+            ModelState.AddModelError($"{prefix}.{error.PropertyName}", error.ErrorMessage);
     }
 }

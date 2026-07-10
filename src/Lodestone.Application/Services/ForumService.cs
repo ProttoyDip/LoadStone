@@ -116,6 +116,22 @@ public class ForumService : IForumService
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task<IReadOnlyList<ForumPostDto>> GetFlaggedPostsAsync(CancellationToken cancellationToken = default)
+        => (await _forumRepository.GetFlaggedPostsAsync(cancellationToken))
+            .Select(MapToDto)
+            .ToList()
+            .AsReadOnly();
+
+    public async Task ReviewPostAsync(int postId, bool publish, CancellationToken cancellationToken = default)
+    {
+        var post = await _forumRepository.GetPostByIdAsync(postId, cancellationToken)
+            ?? throw new InvalidOperationException($"Post {postId} not found.");
+
+        post.Status = publish ? ForumPostStatus.Published : ForumPostStatus.Removed;
+        post.ModifiedAtUtc = DateTime.UtcNow;
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
+
     private static ForumPostDto MapToDto(ForumPost p)
         => new(p.Id, p.ForumCategoryId, p.AuthorUserId, p.Title, p.Body, p.Status, p.CreatedAtUtc);
 }
