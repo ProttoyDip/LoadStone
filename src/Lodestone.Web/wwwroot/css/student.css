@@ -1,0 +1,654 @@
+/* ==========================================================================
+   Lodestone — Student Dashboard
+   Same warm paper / clay / forest / espresso palette as the landing page.
+   ========================================================================== */
+
+/* ---- Page wrapper -------------------------------------------------------- */
+.student-page {
+    min-height: 100vh;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image: radial-gradient(rgba(32,28,23,.035) 1px, transparent 1px);
+    background-size: 22px 22px;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+.student-page *, .student-page *::before, .student-page *::after { box-sizing: border-box; }
+
+.student-page svg {
+    width: 1.1rem; height: 1.1rem;
+    stroke: currentColor; stroke-width: 1.8;
+    fill: none; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ---- Shell --------------------------------------------------------------- */
+.student-shell {
+    width: min(var(--maxw), calc(100% - 2 * var(--gutter)));
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   Hero section
+   ========================================================================== */
+.student-hero {
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--line);
+}
+
+.student-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+}
+
+/* Kicker label */
+.student-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    margin: 0 0 1rem;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--forest);
+}
+.student-kicker span {
+    width: .55rem; height: .55rem;
+    border-radius: 50%;
+    background: var(--forest);
+    box-shadow: 0 0 0 .3rem var(--forest-wash);
+    flex-shrink: 0;
+}
+
+/* Hero heading */
+.student-hero h1 {
+    max-width: 14ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -.02em;
+    color: var(--ink);
+}
+
+.student-hero__lead {
+    max-width: 38rem;
+    margin: 1.2rem 0 0;
+    color: var(--ink-soft);
+    font-size: 1.06rem;
+    line-height: 1.7;
+}
+
+.student-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .85rem;
+    margin-top: 1.8rem;
+}
+
+/* Buttons — inherit global ls-btn tokens */
+.student-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 2.8rem;
+    padding: .78rem 1.25rem;
+    border-radius: var(--r-sm);
+    border: 1px solid transparent;
+    font-family: var(--font-body);
+    font-size: .95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform .28s var(--ease), box-shadow .28s var(--ease),
+                background-color .2s ease, border-color .2s ease;
+}
+.student-btn:hover  { transform: translateY(-2px); }
+.student-btn:active { transform: none; }
+.student-btn:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+
+.student-btn--primary {
+    background: var(--clay);
+    border-color: var(--clay);
+    color: var(--paper);
+    box-shadow: 6px 6px 0 rgba(154,63,42,.14);
+}
+.student-btn--primary:hover { background: var(--clay-deep); border-color: var(--clay-deep); box-shadow: 6px 6px 0 rgba(154,63,42,.26); }
+
+.student-btn--secondary {
+    background: var(--clay-wash);
+    border-color: rgba(188,81,56,.22);
+    color: var(--clay-deep);
+}
+.student-btn--secondary:hover { border-color: var(--clay); box-shadow: var(--shadow-print); }
+
+/* ==========================================================================
+   Pathway visual (right side of hero)
+   ========================================================================== */
+.student-visual {
+    position: relative;
+    padding: 1.1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-lg);
+    background: var(--card);
+    box-shadow: var(--shadow-print);
+}
+.student-visual::before {
+    content: "";
+    position: absolute;
+    inset: 1.1rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--r-md);
+    pointer-events: none;
+}
+
+.student-visual__header,
+.student-visual__footer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.student-visual__header {
+    padding: .35rem .35rem 1rem;
+    border-bottom: 1px solid var(--line);
+}
+.student-visual__header span,
+.student-visual__footer {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    color: var(--muted);
+}
+.student-visual__header strong { font-size: .95rem; color: var(--ink); font-family: var(--font-body); }
+
+.student-pathway {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: .85rem;
+    padding: 1.1rem .35rem;
+}
+
+.pathway-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .8rem;
+    align-items: center;
+    min-height: 5.2rem;
+    padding: .9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--paper);
+    transition: border-color .2s ease, background-color .2s ease;
+}
+.pathway-card--active {
+    border-color: rgba(188,81,56,.3);
+    background: var(--clay-wash);
+}
+.pathway-card__icon,
+.quick-action__icon {
+    display: grid;
+    place-items: center;
+    width: 2.3rem; height: 2.3rem;
+    border-radius: var(--r-sm);
+    color: var(--clay-deep);
+    background: var(--clay-wash);
+    flex-shrink: 0;
+}
+.pathway-card h2 { font-family: var(--font-body); font-size: 1rem; font-weight: 600; margin: 0; letter-spacing: 0; color: var(--ink); }
+.pathway-card p  { margin: .2rem 0 0; color: var(--ink-soft); font-size: .88rem; }
+
+.student-visual__footer {
+    justify-content: flex-start;
+    padding: .9rem .35rem .25rem;
+    border-top: 1px solid var(--line);
+}
+.student-status-dot {
+    width: .58rem; height: .58rem;
+    border-radius: 50%;
+    background: var(--forest);
+    box-shadow: 0 0 0 .3rem var(--forest-wash);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Quick-action row
+   ========================================================================== */
+.student-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .9rem;
+    padding: 1.5rem 0 2.5rem;
+}
+
+.quick-action {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .75rem;
+    align-items: center;
+    min-height: 5rem;
+    padding: .85rem 1rem;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--card);
+    box-shadow: var(--shadow-print);
+    transition: transform .25s var(--ease), border-color .2s ease, box-shadow .25s var(--ease);
+}
+.quick-action:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-strong);
+    box-shadow: 6px 6px 0 rgba(32,28,23,.1);
+}
+.quick-action strong, .quick-action small { display: block; }
+.quick-action strong { font-size: .95rem; font-weight: 600; color: var(--ink); }
+.quick-action small  { margin-top: .18rem; color: var(--muted); font-size: .82rem; }
+
+.quick-action--urgent .quick-action__icon {
+    color: var(--clay-deep);
+    background: var(--clay-wash);
+}
+
+/* ==========================================================================
+   Section shared styles
+   ========================================================================== */
+.student-section {
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+    border-top: 1px solid var(--line);
+}
+
+.student-section__head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+}
+
+/* Section index number */
+.section-index {
+    display: grid;
+    place-items: center;
+    width: 2rem; height: 2rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-xs);
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--clay-deep);
+    background: var(--clay-wash);
+    flex-shrink: 0;
+}
+
+.student-section__head h2,
+.student-privacy h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    margin: 0;
+    line-height: 1.1;
+    color: var(--ink);
+}
+.student-section__head p,
+.student-privacy p {
+    max-width: 44rem;
+    margin: .45rem 0 0;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+/* ==========================================================================
+   Support planner (tabbed)
+   ========================================================================== */
+.student-planner {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-lg);
+    background: var(--card);
+    overflow: hidden;
+    box-shadow: var(--shadow-print);
+}
+
+.planner-tabs {
+    display: flex;
+    gap: 0;
+    padding: .4rem;
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--line);
+}
+.planner-tab {
+    min-height: 2.4rem;
+    padding: .5rem .95rem;
+    color: var(--muted);
+    border: 1px solid transparent;
+    border-radius: var(--r-sm);
+    background: transparent;
+    font: inherit;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+.planner-tab.is-active {
+    color: var(--ink);
+    background: var(--card);
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow-print);
+}
+.planner-tab:hover:not(.is-active) { color: var(--ink-soft); }
+.planner-tab:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
+
+.planner-panel {
+    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.planner-panel.is-active { display: grid; }
+
+.planner-panel article {
+    min-height: 13rem;
+    padding: 1.4rem;
+}
+.planner-panel article + article { border-left: 1px solid var(--line); }
+
+.planner-panel h3,
+.student-card h3,
+.pathway-tile h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: .75rem 0 0;
+    line-height: 1.2;
+    color: var(--ink);
+}
+.planner-panel p,
+.student-card p,
+.pathway-tile p {
+    margin: .55rem 0 0;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    font-size: .97rem;
+}
+.planner-panel a,
+.student-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-top: 1rem;
+    color: var(--clay-deep);
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--clay-wash);
+    padding-bottom: 1px;
+    transition: color .2s ease, border-color .2s ease;
+}
+.planner-panel a:hover,
+.student-card__link:hover {
+    color: var(--clay);
+    border-color: var(--clay);
+}
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+.student-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.6rem;
+    padding: .18rem .55rem;
+    border-radius: var(--r-xs);
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--forest);
+    background: var(--forest-wash);
+    border: 1px solid rgba(60,86,71,.18);
+}
+.student-badge--soft {
+    color: var(--clay-deep);
+    background: var(--clay-wash);
+    border-color: rgba(188,81,56,.18);
+}
+.student-badge--green {
+    color: var(--forest);
+    background: var(--forest-wash);
+    border-color: rgba(60,86,71,.18);
+}
+.student-badge--urgent {
+    color: var(--clay-deep);
+    background: var(--clay-wash);
+    border-color: rgba(188,81,56,.3);
+}
+
+/* ==========================================================================
+   Bento card grid
+   ========================================================================== */
+.student-bento {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .9rem;
+}
+
+.student-card {
+    min-height: 12.5rem;
+    padding: 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--card);
+    box-shadow: var(--shadow-print);
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .2s ease;
+}
+.student-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-strong);
+    box-shadow: 8px 8px 0 rgba(32,28,23,.1);
+}
+.student-card--wide  { grid-column: span 2; }
+.student-card--accent { background: var(--paper-2); }
+
+.student-card__top {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.student-eyebrow {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Rhythm chart */
+.rhythm-chart {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .65rem;
+    align-items: end;
+    height: 8.8rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--paper);
+}
+.rhythm-chart span {
+    position: relative;
+    min-height: 2rem;
+    border-radius: var(--r-xs) var(--r-xs) 0 0;
+    background: var(--forest);
+    transition: transform .2s ease;
+}
+.rhythm-chart span:nth-child(3),
+.rhythm-chart span:nth-child(5) { background: var(--clay); }
+.rhythm-chart b {
+    position: absolute;
+    left: 50%; bottom: -1.45rem;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+/* Mini progress bar */
+.mini-progress {
+    height: .45rem;
+    margin-top: 1rem;
+    border-radius: 99px;
+    background: var(--paper-3);
+    overflow: hidden;
+}
+.mini-progress span {
+    display: block;
+    width: 68%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--forest) 0%, var(--clay) 100%);
+}
+
+/* ==========================================================================
+   Pathway tiles (section 03)
+   ========================================================================== */
+.pathway-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .9rem;
+}
+
+.pathway-tile {
+    min-height: 13.5rem;
+    padding: 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--card);
+    box-shadow: var(--shadow-print);
+    transition: transform .25s var(--ease), border-color .2s ease, box-shadow .25s var(--ease);
+}
+.pathway-tile:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-strong);
+    box-shadow: 6px 6px 0 rgba(32,28,23,.1);
+}
+.pathway-tile--urgent {
+    border-color: rgba(188,81,56,.28);
+    background: var(--clay-wash);
+}
+.pathway-tile__number {
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    color: var(--clay-deep);
+}
+
+/* ==========================================================================
+   Privacy section (espresso dark band)
+   ========================================================================== */
+.student-privacy {
+    margin-top: 2rem;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    background: var(--espresso);
+    color: var(--paper-on-dark);
+    border-top: 1px solid var(--line-on-dark);
+}
+.student-privacy .section-index {
+    margin-bottom: 1rem;
+    color: var(--paper-on-dark);
+    background: rgba(244,238,227,.1);
+    border-color: var(--line-on-dark);
+}
+.student-privacy h2 { color: var(--paper-on-dark); }
+.student-privacy p  { color: var(--muted-on-dark); }
+
+.student-privacy__grid {
+    display: grid;
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.privacy-list {
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--line-on-dark);
+    border-radius: var(--r-md);
+    overflow: hidden;
+}
+.privacy-list article {
+    display: grid;
+    gap: .3rem;
+    padding: 1rem 1.1rem;
+    background: rgba(244,238,227,.04);
+}
+.privacy-list article + article { border-top: 1px solid var(--line-on-dark); }
+.privacy-list strong { color: var(--paper-on-dark); font-size: .97rem; }
+.privacy-list span   { color: var(--muted-on-dark); font-size: .93rem; line-height: 1.55; }
+
+/* ==========================================================================
+   Scroll-reveal animations
+   ========================================================================== */
+.student-page.student-motion-ready .student-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .5s ease, transform .5s var(--ease);
+}
+.student-page.student-motion-ready .student-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 980px) {
+    .student-hero__grid,
+    .student-privacy__grid { grid-template-columns: 1fr; }
+    .student-visual { max-width: 44rem; }
+    .student-quick-actions,
+    .student-bento,
+    .pathway-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+    .student-hero h1 { font-size: 2.4rem; max-width: 13ch; }
+    .student-hero__lead { font-size: .98rem; }
+    .student-hero__actions,
+    .planner-tabs { flex-direction: column; }
+    .student-btn, .planner-tab { width: 100%; justify-content: center; }
+    .student-quick-actions,
+    .student-bento,
+    .pathway-grid,
+    .planner-panel.is-active { grid-template-columns: 1fr; }
+    .student-card--wide { grid-column: auto; }
+    .planner-panel article + article { border-left: 0; border-top: 1px solid var(--line); }
+    .student-card__top { display: grid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .student-page *, .student-page *::before, .student-page *::after {
+        transition-duration: .001ms !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+    .student-page.student-motion-ready .student-reveal { opacity: 1; transform: none; }
+}
