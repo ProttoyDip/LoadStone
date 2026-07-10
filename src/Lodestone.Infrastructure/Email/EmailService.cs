@@ -16,7 +16,7 @@ public class EmailService : IEmailService
     {
         using var message = new MailMessage
         {
-            From = new MailAddress(_settings.FromAddress),
+            From = new MailAddress(_settings.FromAddress, _settings.DisplayName),
             Subject = subject,
             Body = htmlBody,
             IsBodyHtml = true
@@ -25,10 +25,10 @@ public class EmailService : IEmailService
 
         using var client = new SmtpClient(_settings.SmtpHost, _settings.SmtpPort)
         {
-            EnableSsl = _settings.SmtpPort != 25,
-            Credentials = string.IsNullOrWhiteSpace(_settings.UserName)
-                ? CredentialCache.DefaultNetworkCredentials
-                : new NetworkCredential(_settings.UserName, _settings.Password)
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(_settings.UserName, _settings.Password)
         };
 
         await client.SendMailAsync(message, cancellationToken);

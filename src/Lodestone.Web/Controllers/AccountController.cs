@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Encodings.Web;
 using Lodestone.Application.Interfaces;
+using Lodestone.Infrastructure.Email;
 using Lodestone.Domain.Constants;
 using Lodestone.Domain.Entities;
 using Lodestone.Web.ViewModels.Auth;
@@ -94,7 +95,7 @@ public class AccountController : Controller
     public IActionResult Register(string? returnUrl = null)
     {
         if (_signInManager.IsSignedIn(User))
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Index", "Student");
 
         ViewData["ReturnUrl"] = returnUrl;
         return View(new RegisterViewModel());
@@ -228,14 +229,14 @@ public class AccountController : Controller
 
     private async Task TrySendResetEmailAsync(string email, string resetUrl)
     {
-        var body =
-            $"""
-             <p>Hello,</p>
-             <p>We received a request to reset your Lodestone password. Click the link below to choose a new one:</p>
-             <p><a href="{HtmlEncoder.Default.Encode(resetUrl)}">Reset your password</a></p>
-             <p>If you didn't request this, you can safely ignore this email — your password won't change.</p>
-             <p>— The Lodestone team</p>
-             """;
+        var safeUrl = HtmlEncoder.Default.Encode(resetUrl);
+        var inner =
+            EmailTemplate.Heading("Reset your password") +
+            EmailTemplate.Para("We received a request to reset your Lodestone password. Click the button below to choose a new one.") +
+            EmailTemplate.Button(safeUrl, "Reset Password") +
+            EmailTemplate.SmallMuted("If you didn't request this, you can safely ignore this email — your password won't change. This link expires in 24 hours.");
+
+        var body = EmailTemplate.Wrap(inner, "Reset your Lodestone password");
         try
         {
             await _emailService.SendAsync(email, "Reset your Lodestone password", body);
@@ -263,7 +264,9 @@ public class AccountController : Controller
             return RedirectToAction("Index", "Admin");
         if (roles.Contains(RoleConstants.Counselor))
             return RedirectToAction("Queue", "Counselor");
+        if (roles.Contains(RoleConstants.Student))
+            return RedirectToAction("Index", "Student");
 
-        return RedirectToAction("Index", "Dashboard");
+        return RedirectToAction("Index", "Student");
     }
 }

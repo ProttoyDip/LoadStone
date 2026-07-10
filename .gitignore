@@ -31,6 +31,9 @@ appsettings.*.Local.json
 *.pfx
 keys/
 
+## Local AI agent context (never commit)
+brain.local.md
+
 ## OS
 .DS_Store
 Thumbs.db
