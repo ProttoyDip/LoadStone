@@ -1,0 +1,110 @@
+@model Lodestone.Web.ViewModels.Forum.ForumCategoryViewModel
+@{
+    ViewData["Title"] = "Forum Discussions";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forum.css" asp-append-version="true" />
+}
+
+<div class="forum-page">
+    <section class="forum-subhero">
+        <div class="forum-shell">
+            <nav class="forum-breadcrumb" aria-label="Breadcrumb">
+                <a asp-controller="Forum" asp-action="Index">Forum</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">Discussion area</span>
+            </nav>
+            <div class="forum-subhero__content">
+                <div>
+                    <p class="forum-kicker"><span aria-hidden="true"></span>Discussion area</p>
+                    <h1>Join the conversation with care.</h1>
+                    <p>Read through shared experiences, or begin a new discussion when you are ready.</p>
+                </div>
+                <a class="ls-btn ls-btn--ghost" href="#new-discussion">Start a discussion</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="forum-shell forum-content forum-category-layout">
+        <section class="forum-discussions" aria-labelledby="discussions-title">
+            <div class="forum-section-head forum-section-head--compact">
+                <div>
+                    <p class="forum-section-eyebrow">Community posts</p>
+                    <h2 id="discussions-title">Current discussions</h2>
+                </div>
+                <p>@Model.Posts.Count @(Model.Posts.Count == 1 ? "discussion" : "discussions") in this area</p>
+            </div>
+
+            @if (Model.Posts.Count == 0)
+            {
+                <div class="forum-empty">
+                    <span class="forum-empty__index" aria-hidden="true">01</span>
+                    <div>
+                        <h3>This conversation is waiting to begin.</h3>
+                        <p>You can be the first to share a thoughtful question or experience in this area.</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="forum-post-list">
+                    @foreach (var post in Model.Posts)
+                    {
+                        <article class="forum-post-card">
+                            <div class="forum-post-card__meta">
+                                <span>Community member</span>
+                                <span aria-hidden="true">·</span>
+                                <time datetime="@post.CreatedAtUtc.ToString("O")">@post.CreatedAtUtc.ToString("dd MMM yyyy")</time>
+                            </div>
+                            <h3><a asp-controller="Forum" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h3>
+                            <p class="forum-post-card__excerpt">@post.Body</p>
+                            <a class="forum-text-link" asp-controller="Forum" asp-action="Post" asp-route-id="@post.Id">
+                                Read discussion <span aria-hidden="true">→</span>
+                            </a>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
+
+        <aside class="forum-compose" id="new-discussion" aria-labelledby="new-discussion-title">
+            <div class="forum-compose__heading">
+                <p class="forum-section-eyebrow">Start a discussion</p>
+                <h2 id="new-discussion-title">Share what is on your mind.</h2>
+                <p>A clear title and a few words of context can make it easier for others to respond thoughtfully.</p>
+            </div>
+
+            <form class="forum-form" asp-controller="Forum" asp-action="CreatePost" method="post">
+                <div asp-validation-summary="ModelOnly" class="forum-validation" role="alert"></div>
+                <input asp-for="NewPost.CategoryId" type="hidden" value="@Model.CategoryId" />
+
+                <div class="forum-field">
+                    <label asp-for="NewPost.Title">Discussion title</label>
+                    <input asp-for="NewPost.Title" maxlength="200" autocomplete="off" placeholder="A brief, descriptive title" aria-describedby="title-guidance" />
+                    <p id="title-guidance" class="forum-field-guidance">Avoid including names or identifying details.</p>
+                    <span asp-validation-for="NewPost.Title" class="forum-field-error"></span>
+                </div>
+
+                <div class="forum-field">
+                    <div class="forum-field__label-row">
+                        <label asp-for="NewPost.Body">Your message</label>
+                        <span>Up to 5000 characters</span>
+                    </div>
+                    <textarea asp-for="NewPost.Body" rows="8" maxlength="5000" placeholder="Share as much or as little as feels comfortable. Please keep the conversation respectful and protect your privacy." aria-describedby="body-guidance"></textarea>
+                    <p id="body-guidance" class="forum-field-guidance">This will be visible to other members of the forum.</p>
+                    <span asp-validation-for="NewPost.Body" class="forum-field-error"></span>
+                </div>
+
+                <div class="forum-form__footer">
+                    <p>Your post will be shared with this discussion area.</p>
+                    <button class="ls-btn ls-btn--clay" type="submit">Publish discussion</button>
+                </div>
+            </form>
+        </aside>
+    </main>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

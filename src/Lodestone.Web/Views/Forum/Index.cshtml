@@ -1,5 +1,88 @@
+@model Lodestone.Web.ViewModels.Forum.ForumIndexViewModel
 @{
     ViewData["Title"] = "Peer Support Forum";
 }
-<h1>Peer Support Forum</h1>
-<p>Lodestone — placeholder view. Wire up the view model in the corresponding controller action.</p>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forum.css" asp-append-version="true" />
+}
+
+<div class="forum-page">
+    <section class="forum-hero" aria-labelledby="forum-title">
+        <div class="forum-shell forum-hero__grid">
+            <div>
+                <p class="forum-kicker"><span aria-hidden="true"></span>Peer support forum</p>
+                <h1 id="forum-title">A steady space for shared experience.</h1>
+                <p class="forum-hero__lead">
+                    Explore conversations with other students, share what is on your mind, and respond with care.
+                    This is a peer space, not a substitute for professional or emergency support.
+                </p>
+            </div>
+
+            <aside class="forum-guidance" aria-labelledby="forum-guidance-title">
+                <p class="forum-guidance__eyebrow">Before you take part</p>
+                <h2 id="forum-guidance-title">Keep the conversation thoughtful.</h2>
+                <p>Share only what feels right for you. Be kind, protect privacy, and use the report option if a post needs review.</p>
+            </aside>
+        </div>
+    </section>
+
+    <main class="forum-shell forum-content">
+        <section aria-labelledby="categories-title">
+            <div class="forum-section-head">
+                <div>
+                    <p class="forum-section-eyebrow">Choose a conversation</p>
+                    <h2 id="categories-title">Discussion areas</h2>
+                </div>
+                <p>Find a topic that best matches the support or perspective you are looking for.</p>
+            </div>
+
+            @if (Model.Categories.Count == 0)
+            {
+                <div class="forum-empty" role="status">
+                    <span class="forum-empty__index" aria-hidden="true">01</span>
+                    <div>
+                        <h3>Discussion areas are being prepared.</h3>
+                        <p>Please check back shortly to join a conversation.</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <nav class="forum-category-grid" aria-label="Forum categories">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <a class="forum-category-card" asp-controller="Forum" asp-action="Category" asp-route-id="@category.Id">
+                            <span class="forum-category-card__number" aria-hidden="true">@category.Id.ToString("D2")</span>
+                            <span class="forum-category-card__content">
+                                <span class="forum-category-card__title">@category.Name</span>
+                                @if (!string.IsNullOrWhiteSpace(category.Description))
+                                {
+                                    <span class="forum-category-card__description">@category.Description</span>
+                                }
+                                else
+                                {
+                                    <span class="forum-category-card__description">A place for considered peer discussion and shared support.</span>
+                                }
+                            </span>
+                            <span class="forum-category-card__meta">
+                                <strong>@category.PostCount</strong>
+                                <span>@(category.PostCount == 1 ? "discussion" : "discussions")</span>
+                            </span>
+                            <span class="forum-category-card__arrow" aria-hidden="true">View area</span>
+                        </a>
+                    }
+                </nav>
+            }
+        </section>
+
+        <aside class="forum-support-note" aria-labelledby="support-note-title">
+            <div class="forum-support-note__mark" aria-hidden="true">Support</div>
+            <div>
+                <p class="forum-section-eyebrow">A gentle reminder</p>
+                <h2 id="support-note-title">If you need immediate help, use the crisis support available through Lodestone.</h2>
+            </div>
+            <a class="ls-btn ls-btn--ghost ls-btn--sm" asp-controller="CrisisResource" asp-action="Index">View support options</a>
+        </aside>
+    </main>
+</div>

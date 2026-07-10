@@ -32,12 +32,20 @@ public class ForumRepository : GenericRepository<ForumPost>, IForumRepository
     public async Task<ForumPost?> GetPostWithCommentsAsync(
         int postId, CancellationToken cancellationToken = default)
         => await Set
-            .Include(p => p.Comments)
+            .Include(p => p.Comments.Where(comment =>
+                comment.Status == ForumPostStatus.Published && !comment.IsDeleted))
             .Include(p => p.Category)
             .FirstOrDefaultAsync(p => p.Id == postId && !p.IsDeleted, cancellationToken);
 
     public async Task<ForumPost?> GetPostByIdAsync(int postId, CancellationToken cancellationToken = default)
         => await Set.FirstOrDefaultAsync(p => p.Id == postId, cancellationToken);
+
+    public async Task<IReadOnlyList<ForumPost>> GetFlaggedPostsAsync(CancellationToken cancellationToken = default)
+        => await Set
+            .Where(post => post.Status == ForumPostStatus.Flagged && !post.IsDeleted)
+            .OrderBy(post => post.CreatedAtUtc)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
 
     public async Task AddPostAsync(ForumPost post, CancellationToken cancellationToken = default)
         => await Set.AddAsync(post, cancellationToken);

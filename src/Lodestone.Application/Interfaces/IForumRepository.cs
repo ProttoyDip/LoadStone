@@ -12,4 +12,5 @@ public interface IForumRepository
     Task AddCommentAsync(ForumComment comment, CancellationToken cancellationToken = default);
     Task AddFlagAsync(ForumFlag flag, CancellationToken cancellationToken = default);
     Task<ForumPost?> GetPostByIdAsync(int postId, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<ForumPost>> GetFlaggedPostsAsync(CancellationToken cancellationToken = default);
 }
