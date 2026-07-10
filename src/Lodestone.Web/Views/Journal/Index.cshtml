@@ -1,5 +1,193 @@
+@model Lodestone.Web.ViewModels.Journal.JournalViewModel
 @{
-    ViewData["Title"] = "Mood Journal";
+    ViewData["Title"] = "Wellbeing Journal";
+    var averageMood = Model.Entries.Count == 0 ? 0 : Model.Entries.Average(entry => entry.MoodRating);
+    var latestEntry = Model.Entries.FirstOrDefault();
+    var ratingLabels = new Dictionary<int, (string Label, string Description)>
+    {
+        [1] = ("Significantly below usual", "I am finding today particularly difficult."),
+        [2] = ("Below usual", "I am not feeling like myself today."),
+        [3] = ("About usual", "I am managing as expected."),
+        [4] = ("Above usual", "I am feeling more settled or positive today."),
+        [5] = ("Significantly above usual", "I am feeling especially well today.")
+    };
 }
-<h1>Mood Journal</h1>
-<p>Lodestone — placeholder view. Wire up the view model in the corresponding controller action.</p>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/journal.css" asp-append-version="true" />
+}
+
+<div class="journal-page">
+    <section class="journal-hero" aria-labelledby="journal-title">
+        <div class="journal-shell journal-hero__grid">
+            <div>
+                <p class="journal-kicker"><span aria-hidden="true"></span>Private wellbeing record</p>
+                <h1 id="journal-title">A considered moment to check in with yourself.</h1>
+                <p class="journal-hero__lead">
+                    This is a private space to record how you are doing. A short rating is enough;
+                    add a note only when it would be useful to revisit later.
+                </p>
+            </div>
+
+            <aside class="journal-privacy" aria-label="Journal privacy">
+                <span>Confidential by design</span>
+                <strong>Your entries remain separate from peer discussions.</strong>
+                <p>This journal is for personal reflection. It is not a diagnosis or an assessment of your academic performance.</p>
+            </aside>
+        </div>
+    </section>
+
+    <main class="journal-shell journal-content">
+        @if (TempData["JournalSuccess"] is string successMessage)
+        {
+            <div class="journal-alert" role="status">
+                <span aria-hidden="true">Saved</span>
+                @successMessage
+            </div>
+        }
+
+        <section class="journal-compose" aria-labelledby="checkin-title">
+            <div class="journal-section-head">
+                <span class="journal-index">01</span>
+                <div>
+                    <p class="journal-section-eyebrow">Daily check-in</p>
+                    <h2 id="checkin-title">How would you describe your overall wellbeing today?</h2>
+                    <p>Choose the response that best reflects the last 24 hours. There is no right or wrong answer.</p>
+                </div>
+            </div>
+
+            @if (Model.HasEntryToday)
+            {
+                <div class="journal-daily-limit" role="status">
+                    <span class="journal-daily-limit__mark" aria-hidden="true">✓</span>
+                    <div>
+                        <p class="journal-daily-limit__eyebrow">Today’s check-in is complete</p>
+                        <h3>You have already recorded your wellbeing for today.</h3>
+                        <p>Lodestone keeps one private check-in per day so your record remains considered and easy to revisit. You can return tomorrow for your next reflection.</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <form class="journal-form" asp-controller="Journal" asp-action="AddEntry" method="post">
+                    <div asp-validation-summary="ModelOnly" class="journal-validation" role="alert"></div>
+
+                    <fieldset class="mood-fieldset">
+                        <legend>Wellbeing rating <span>Required</span></legend>
+                        <div class="mood-scale" aria-describedby="mood-scale-guidance">
+                            <div class="mood-scale__axis" aria-hidden="true">
+                                <span>Lower than usual</span>
+                                <span>Higher than usual</span>
+                            </div>
+                            <div class="mood-options">
+                                @foreach (var rating in ratingLabels)
+                                {
+                                    <label class="mood-option mood-option--@rating.Key">
+                                        <input asp-for="NewEntry.MoodRating" type="radio" value="@rating.Key" />
+                                        <span class="mood-option__number" aria-hidden="true">@rating.Key</span>
+                                        <span class="mood-option__content">
+                                            <strong>@rating.Value.Label</strong>
+                                            <small>@rating.Value.Description</small>
+                                        </span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                        <p id="mood-scale-guidance" class="journal-field-guidance">Your rating is a personal reflection, not a clinical measure.</p>
+                        <span asp-validation-for="NewEntry.MoodRating" class="journal-field-error"></span>
+                    </fieldset>
+
+                    <div class="journal-note-field">
+                        <div class="journal-note-field__label">
+                            <div>
+                                <label asp-for="NewEntry.Note">What would you like to remember about today?</label>
+                                <p>Optional private note</p>
+                            </div>
+                            <span><b id="journal-note-count">0</b> / 2000</span>
+                        </div>
+                        <textarea asp-for="NewEntry.Note" rows="7" maxlength="2000"
+                                  placeholder="For example: a situation that affected you, something that helped, or a next step you would like to take."
+                                  aria-describedby="journal-note-help"></textarea>
+                        <p id="journal-note-help" class="journal-field-guidance">A few words are enough. Do not include anything you would not want stored in your private journal.</p>
+                        <span asp-validation-for="NewEntry.Note" class="journal-field-error"></span>
+                    </div>
+
+                    <div class="journal-form__footer">
+                        <p><span aria-hidden="true"></span>Your entry is saved to your private Lodestone journal.</p>
+                        <button class="journal-submit" type="submit">Save check-in</button>
+                    </div>
+                </form>
+            }
+        </section>
+
+        <section class="journal-history" aria-labelledby="history-title">
+            <div class="journal-section-head">
+                <span class="journal-index">02</span>
+                <div>
+                    <p class="journal-section-eyebrow">Personal record</p>
+                    <h2 id="history-title">Your recent check-ins</h2>
+                    <p>Use this record to notice patterns over time, without treating individual ratings as a score.</p>
+                </div>
+            </div>
+
+            @if (Model.Entries.Count == 0)
+            {
+                <div class="journal-empty">
+                    <span class="journal-empty__mark" aria-hidden="true">01</span>
+                    <h3>Your first check-in begins here.</h3>
+                    <p>A rating alone is a complete entry. You can add a note whenever it feels helpful.</p>
+                </div>
+            }
+            else
+            {
+                <div class="journal-summary" aria-label="Journal summary">
+                    <article>
+                        <span>Check-ins recorded</span>
+                        <strong>@Model.Entries.Count</strong>
+                    </article>
+                    <article>
+                        <span>Average self-rating</span>
+                        <strong>@averageMood.ToString("0.0") <small>out of 5</small></strong>
+                    </article>
+                    <article>
+                        <span>Most recent entry</span>
+                        <strong><time class="journal-local-date" datetime="@latestEntry!.EntryDateUtc.ToString("O")">@latestEntry.EntryDateUtc.ToString("dd MMM")</time></strong>
+                    </article>
+                </div>
+
+                <div class="journal-entries">
+                    @foreach (var entry in Model.Entries)
+                    {
+                        var rating = ratingLabels[entry.MoodRating];
+                        <article class="journal-entry">
+                            <div class="journal-entry__rating" aria-label="Wellbeing rating: @rating.Label, @entry.MoodRating out of 5">
+                                <span>@entry.MoodRating</span>
+                                <div>
+                                    <strong>@rating.Label</strong>
+                                    <small>Wellbeing rating</small>
+                                </div>
+                            </div>
+                            <div class="journal-entry__body">
+                                <time class="journal-local-datetime" datetime="@entry.EntryDateUtc.ToString("O")">
+                                    @entry.EntryDateUtc.ToString("dd MMM yyyy, HH:mm") UTC
+                                </time>
+                                @if (string.IsNullOrWhiteSpace(entry.Note))
+                                {
+                                    <p class="journal-entry__no-note">No written reflection was added to this check-in.</p>
+                                }
+                                else
+                                {
+                                    <p>@entry.Note</p>
+                                }
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
+    </main>
+</div>
+
+@section Scripts {
+    <script src="~/js/journal.js" asp-append-version="true" defer></script>
+}
