@@ -77,6 +77,7 @@ app.MapControllerRoute(
 app.MapRazorPages();
 app.MapHub<CounselorQueueHub>(CounselorQueueHub.Route);
 app.MapHub<PeerChatHub>(PeerChatHub.Route);
+app.MapHub<AdminNotificationHub>(AdminNotificationHub.Route);
 if (useHangfire)
 {
     app.MapHangfireDashboard();
@@ -94,6 +95,11 @@ using (var scope = app.Services.CreateScope())
 
         var roleManager = services.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Microsoft.AspNetCore.Identity.IdentityRole>>();
         await RoleSeeder.SeedRolesAsync(roleManager);
+
+        var userManager = services.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<Lodestone.Domain.Entities.ApplicationUser>>();
+        var adminPassword = builder.Configuration["SeedData:AdminPassword"]
+            ?? Environment.GetEnvironmentVariable("LODESTONE_ADMIN_PASSWORD");
+        await AdminUserSeeder.SeedAsync(userManager, roleManager, adminPassword ?? string.Empty);
     }
 
     if (useHangfire)
