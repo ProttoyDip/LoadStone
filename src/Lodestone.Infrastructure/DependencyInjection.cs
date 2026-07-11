@@ -3,6 +3,7 @@ using Lodestone.Infrastructure.Data;
 using Lodestone.Infrastructure.Email;
 using Lodestone.Infrastructure.Identity;
 using Lodestone.Infrastructure.Repositories;
+using Lodestone.Infrastructure.Services;
 using Lodestone.Infrastructure.Security;
 using Lodestone.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ public static class DependencyInjection
         // Application contracts implemented here.
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IAdminDashboardService, AdminDashboardService>();
 
         // Repositories — interface-mapped so Application services can depend on abstractions.
         services.AddScoped(typeof(GenericRepository<>));

@@ -22,7 +22,6 @@ public static class DependencyInjection
         services.AddScoped<IBookingService, BookingService>();
         services.AddScoped<ICounselorQueueService, CounselorQueueService>();
         services.AddScoped<ICrisisResourceService, CrisisResourceService>();
-
         return services;
     }
 }

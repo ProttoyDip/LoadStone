@@ -1,0 +1,162 @@
+@model AdminSectionViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = Model.Page.Title;
+}
+
+<div class="ls-admin-page">
+    <section class="ls-admin-hero card ls-admin-surface">
+        <div class="ls-admin-hero__body">
+            <div>
+                <p class="ls-admin-kicker">Admin section</p>
+                <h1 class="ls-admin-title">@Model.Page.Title</h1>
+                <p class="ls-admin-subtitle">@Model.Page.Subtitle</p>
+            </div>
+            <div class="ls-admin-hero__actions">
+                @if (Model.Page.ShowExportButtons)
+                {
+                    <a class="btn btn-sm btn-outline-secondary" href="#"><i class="bi bi-file-earmark-pdf me-2"></i>Export PDF</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="#"><i class="bi bi-file-earmark-excel me-2"></i>Export Excel</a>
+                }
+                <a class="btn btn-sm btn-primary" asp-controller="Admin" asp-action="Index"><i class="bi bi-arrow-left me-2"></i>Back to dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="ls-admin-section">
+        <div class="ls-admin-section__head">
+            <div>
+                <p class="ls-admin-section__eyebrow">Summary</p>
+                <h2 class="ls-admin-section__title">Section metrics</h2>
+            </div>
+        </div>
+        <div class="row g-3 row-cols-1 row-cols-md-3">
+            @foreach (var metric in Model.Page.Metrics)
+            {
+                <div class="col">
+                    <div class="card ls-admin-surface ls-admin-mini-metric">
+                        <span class="ls-admin-mini-card__label">@metric.Label</span>
+                        <strong class="@(metric.Tone ?? string.Empty)">@metric.Value</strong>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="ls-admin-section">
+        <div class="card ls-admin-surface ls-admin-table-card">
+            <div class="ls-admin-section__head ls-admin-section__head--compact">
+                <div>
+                    <p class="ls-admin-section__eyebrow">Data</p>
+                    <h2 class="ls-admin-section__title">@Model.Page.Title records</h2>
+                </div>
+                <div class="ls-admin-table-tools">
+                    @if (Model.Page.ShowFilters)
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">Filters</button>
+                            <div class="dropdown-menu dropdown-menu-end p-3 ls-admin-filter-menu">
+                                <div class="mb-2">
+                                    <label class="form-label">Risk Level</label>
+                                    <select class="form-select form-select-sm"><option>All</option><option>High</option><option>Medium</option><option>Low</option></select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Department</label>
+                                    <select class="form-select form-select-sm"><option>All</option><option>CSE</option><option>EEE</option><option>BBA</option></select>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="input-group input-group-sm ls-admin-search-inline">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="search" class="form-control" placeholder="@Model.Page.SearchPlaceholder" />
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Page.Rows.Count == 0)
+            {
+                <div class="ls-admin-empty">@Model.Page.EmptyStateMessage</div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table align-middle ls-admin-table">
+                        <thead>
+                            <tr>
+                                @foreach (var column in Model.Page.Columns)
+                                {
+                                    <th class="@column.CssClass">@column.Label</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Model.Page.Rows)
+                            {
+                                <tr>
+                                    @for (var i = 0; i < Model.Page.Columns.Count; i++)
+                                    {
+                                        var column = Model.Page.Columns[i];
+                                        var isActionColumn = string.Equals(column.Key, "actions", StringComparison.OrdinalIgnoreCase);
+                                        <td class="@column.CssClass">
+                                            @if (i == 0)
+                                            {
+                                                <div class="ls-admin-table__primary">@row.PrimaryLabel</div>
+                                                <div class="ls-admin-table__secondary">@row.SecondaryLabel</div>
+                                                @if (!string.IsNullOrWhiteSpace(row.BadgeText))
+                                                {
+                                                    <span class="badge @row.BadgeClass mt-2">@row.BadgeText</span>
+                                                }
+                                            }
+                                            else if (isActionColumn)
+                                            {
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    @foreach (var action in row.Actions)
+                                                    {
+                                                        <a class="@action.CssClass" href="@action.Url"><i class="bi @action.Icon me-1"></i>@action.Label</a>
+                                                    }
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                row.Cells.TryGetValue(column.Key, out var value);
+                                                @value
+                                            }
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </section>
+
+    @if (Model.Page.Activity.Count > 0)
+    {
+        <section class="ls-admin-section">
+            <div class="card ls-admin-surface ls-admin-panel">
+                <div class="ls-admin-section__head ls-admin-section__head--compact">
+                    <div>
+                        <p class="ls-admin-section__eyebrow">Activity</p>
+                        <h2 class="ls-admin-section__title">Recent section activity</h2>
+                    </div>
+                </div>
+                <div class="ls-admin-activity ls-admin-activity--compact">
+                    @foreach (var item in Model.Page.Activity)
+                    {
+                        <article class="ls-admin-activity__item">
+                            <div class="ls-admin-activity__icon @item.ToneClass"><i class="bi @item.Icon"></i></div>
+                            <div class="ls-admin-activity__content">
+                                <div class="ls-admin-activity__title">@item.Title</div>
+                                <div class="ls-admin-activity__subtitle">@item.Subtitle</div>
+                            </div>
+                            <div class="ls-admin-activity__time">@item.TimeLabel</div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </section>
+    }
+</div>

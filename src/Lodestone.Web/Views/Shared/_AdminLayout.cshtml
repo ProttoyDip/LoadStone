@@ -1,0 +1,54 @@
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F4EEE3" />
+    <title>@(ViewData["Title"] ?? "Admin") - Lodestone</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-dashboard.css" asp-append-version="true" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body class="ls-admin">
+
+    <header class="ls-admin-topnav" id="ls-admin-topnav">
+        <div class="ls-shell ls-admin-topnav__inner">
+            @await Html.PartialAsync("_AdminTopNav")
+        </div>
+    </header>
+
+    <div class="ls-admin-body">
+        <aside class="ls-admin-sidebar" id="ls-admin-sidebar">
+            <div class="ls-admin-sidebar__inner">
+                @await Html.PartialAsync("_AdminSidebar")
+            </div>
+        </aside>
+
+        <main class="ls-admin-main" role="main">
+            <div class="ls-shell ls-admin-main__inner">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@8.0.7/dist/browser/signalr.min.js" defer></script>
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
+    @RenderSection("Scripts", required: false)
+    <script src="~/js/admin-dashboard.js" asp-append-version="true" defer></script>
+</body>
+</html>
+
