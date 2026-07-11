@@ -1,5 +1,107 @@
+@model AdminDashboardViewModel
 @{
-    ViewData["Title"] = "Administration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Admin Dashboard";
 }
-<h1>Administration</h1>
-<p>Lodestone — placeholder view. Wire up the view model in the corresponding controller action.</p>
+
+<div class="ls-admin-page ls-admin-page--dashboard">
+    <section class="ls-admin-hero card ls-admin-surface">
+        <div class="ls-admin-hero__body">
+            <div>
+                <p class="ls-admin-kicker">University Administration</p>
+                <h1 class="ls-admin-title">Operational control center for wellbeing, risk, and support workflows.</h1>
+                <p class="ls-admin-subtitle">Monitor disengagement signals, manage support teams, review moderation queues, and keep the campus support network moving in one place.</p>
+            </div>
+            <div class="ls-admin-hero__actions">
+                <a class="btn btn-sm btn-outline-secondary" asp-controller="Admin" asp-action="Reports"><i class="bi bi-file-earmark-pdf me-2"></i>Export Reports</a>
+                <a class="btn btn-sm btn-primary" asp-controller="Admin" asp-action="MachineLearning"><i class="bi bi-cpu me-2"></i>Open ML Panel</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="ls-admin-section">
+        <div class="ls-admin-section__head">
+            <div>
+                <p class="ls-admin-section__eyebrow">Overview</p>
+                <h2 class="ls-admin-section__title">Key metrics</h2>
+            </div>
+        </div>
+        <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xxl-4">
+            @foreach (var stat in Model.Dashboard.Stats)
+            {
+                <div class="col">
+                    <div class="card ls-admin-surface ls-admin-stat-card @stat.GradientClass">
+                        <div class="ls-admin-stat-card__top">
+                            <div>
+                                <div class="ls-admin-stat-card__label">@stat.Title</div>
+                                <div class="ls-admin-stat-card__value">@stat.Value</div>
+                            </div>
+                            <div class="ls-admin-stat-card__icon"><i class="bi @stat.Icon"></i></div>
+                        </div>
+                        <div class="ls-admin-stat-card__meta">
+                            <span class="@stat.DeltaClass">@stat.Delta</span>
+                            <span>vs last 7 days</span>
+                        </div>
+                        <canvas class="ls-admin-sparkline" data-sparkline="@stat.SparklineJson" height="38" aria-hidden="true"></canvas>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="ls-admin-section">
+        <div class="row g-3">
+            @foreach (var chart in Model.Dashboard.Charts)
+            {
+                var isDoughnut = chart.Type == "doughnut";
+                var chartColClass = isDoughnut ? "col-12 col-xl-4" : "col-12 col-xl-6";
+                var chartCardClass = isDoughnut ? "ls-admin-chart-card--doughnut" : "ls-admin-chart-card--medium";
+                var chartFrameClass = isDoughnut ? "ls-admin-chart-frame--doughnut" : "ls-admin-chart-frame--medium";
+
+                <div class="@chartColClass">
+                    <div class="card ls-admin-surface ls-admin-chart-card @chartCardClass">
+                        <div class="ls-admin-section__head ls-admin-section__head--compact">
+                            <div>
+                                <p class="ls-admin-section__eyebrow">@chart.Subtitle</p>
+                                <h2 class="ls-admin-section__title">@chart.Title</h2>
+                            </div>
+                        </div>
+                        <div class="ls-admin-chart-frame @chartFrameClass">
+                            <canvas id="@chart.Id" class="ls-admin-chart" data-chart-type="@chart.Type" data-chart-config='@Html.Raw(chart.DatasetsJson)'></canvas>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="ls-admin-section">
+        <div class="card ls-admin-surface ls-admin-table-card">
+            <div class="ls-admin-section__head ls-admin-section__head--compact">
+                <div>
+                    <p class="ls-admin-section__eyebrow">Risk Monitoring</p>
+                    <h2 class="ls-admin-section__title">Top queue items</h2>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" asp-controller="Admin" asp-action="RiskMonitoring">Open queue</a>
+            </div>
+            @await Html.PartialAsync("_AdminDashboardTable", Model.Dashboard.RiskRows)
+        </div>
+    </section>
+
+    <section class="ls-admin-section">
+        <div class="card ls-admin-surface ls-admin-table-card">
+            <div class="ls-admin-section__head ls-admin-section__head--compact">
+                <div>
+                    <p class="ls-admin-section__eyebrow">Notifications</p>
+                    <h2 class="ls-admin-section__title">Unread and recent notifications</h2>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" asp-controller="Admin" asp-action="Notifications">Open center</a>
+            </div>
+            @await Html.PartialAsync("_AdminDashboardTable", Model.Dashboard.NotificationRows)
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+}

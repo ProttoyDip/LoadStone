@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Mail;
 using Lodestone.Application.Interfaces;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Lodestone.Infrastructure.Email;
@@ -9,11 +10,23 @@ namespace Lodestone.Infrastructure.Email;
 public class EmailService : IEmailService
 {
     private readonly EmailSettings _settings;
+    private readonly ILogger<EmailService> _logger;
 
-    public EmailService(IOptions<EmailSettings> settings) => _settings = settings.Value;
+    public EmailService(IOptions<EmailSettings> settings, ILogger<EmailService> logger)
+    {
+        _settings = settings.Value;
+        _logger = logger;
+    }
 
     public async Task SendAsync(string to, string subject, string htmlBody, CancellationToken cancellationToken = default)
     {
+        if (string.IsNullOrWhiteSpace(to))
+            throw new ArgumentException("Recipient email is required.", nameof(to));
+        if (string.IsNullOrWhiteSpace(_settings.SmtpHost))
+            throw new InvalidOperationException("Email SMTP host is not configured (Email:SmtpHost)." );
+        if (string.IsNullOrWhiteSpace(_settings.UserName) || string.IsNullOrWhiteSpace(_settings.Password))
+            throw new InvalidOperationException("Email SMTP credentials are not configured (Email:UserName/Email:Password)." );
+
         using var message = new MailMessage
         {
             From = new MailAddress(_settings.FromAddress, _settings.DisplayName),
@@ -31,6 +44,20 @@ public class EmailService : IEmailService
             Credentials = new NetworkCredential(_settings.UserName, _settings.Password)
         };
 
-        await client.SendMailAsync(message, cancellationToken);
+        try
+        {
+            await client.SendMailAsync(message, cancellationToken);
+        }
+        catch (SmtpFailedRecipientException ex)
+        {
+            _logger.LogError(ex, "SMTP failed recipient. To={To} Subject={Subject}", to, subject);
+            throw;
+        }
+        catch (SmtpException ex)
+        {
+            _logger.LogError(ex, "SMTP send failed. Host={Host}:{Port} From={From} To={To} Subject={Subject}", _settings.SmtpHost, _settings.SmtpPort, _settings.FromAddress, to, subject);
+            throw;
+        }
     }
 }
+
